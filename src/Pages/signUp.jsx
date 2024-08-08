@@ -1,9 +1,11 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
-export default function signUp() {
-  return (
-    <>
-    <section>
+import React, { Component } from 'react'
+
+export default class SignUp extends Component {
+  render() {
+    return (
+     <>
+      <section>
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
         <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md p-8 bg-white rounded-xl">
           <h2 className="text-center text-2xl font-bold leading-tight text-black">
@@ -81,6 +83,7 @@ export default function signUp() {
         </div>
       </div>
     </section>
-    </>
-  )
+     </>
+    )
+  }
 }

@@ -4,7 +4,7 @@ import ProductCard from "../Container/ProductCard";
 import Loading from "../Components/Loading";
 import Error from "../Components/Error";
 
-export default function Product() {
+export default function Product(props) {
   const [product, setProduct] = useState([]);
   const [error , setError] = useState('');
 
@@ -12,7 +12,7 @@ export default function Product() {
     try {
       // const res = await axios.get("https://api.escuelajs.co/api/v1/products");
       const res = await axios.get("https://fakestoreapi.com/products");
-      setProduct(res.data.slice(0,30));
+      setProduct(res.data);
     } catch (error) {
       setError(error.message)
     }
@@ -31,7 +31,7 @@ if(error==0){
       <div className=" min-h-full py-20 px-4 max-w-screen-xl flex flex-wrap gap-x-6  justify-center gap-y-9 mx-auto">
        
         {product.map((post,i) => {
-          return <ProductCard data={post} key={i}/>;
+          return <ProductCard func={props.countFunc} data={post} key={i}/>;
         })}
        
       </div> 

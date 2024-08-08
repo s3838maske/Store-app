@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function WishlistItem() {
+
   return (
     <>
       <div className="my-28 rounded-xl shadow-2xl mx-auto max-w-7xl px-2 py-10 lg:px-0 bg-white">
@@ -13,15 +14,12 @@ export default function WishlistItem() {
                     <div className="relative flex items-center justify-center">
                       <img
                         alt="Product gallery 1"
-                        src="https://images.unsplash.com/photo-1580902394724-b08ff9ba7e8a?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1548&amp;q=80"
+                        src= "https://images.unsplash.com/photo-1580902394724-b08ff9ba7e8a?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1548&amp;q=80"
                         width="650"
                         height="590"
                         className="rounded-lg object-cover md:h-[300px] md:w-full lg:h-full"
                       />
-                    </div>
-                    <div className="absolute top-2/4 z-10 flex w-full items-center justify-between">
-                      
-                    </div>
+                    </div>                   
                   </div>
                   
                 </div>

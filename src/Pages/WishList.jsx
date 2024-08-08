@@ -3,9 +3,11 @@ import WishlistItem from '../Container/WishlistItem'
 
 
 export default function wishList() {
-  return (
-    <>
-    <WishlistItem/>
-    </>
-  )
-}
+ 
+    return (
+      <>
+      <WishlistItem/>
+      </>
+    )
+  }
+

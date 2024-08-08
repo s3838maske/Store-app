@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar(props) {
+
+
 
   return (
     <>
@@ -16,7 +18,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div className="flex items-center justify-around gap-52">
+          <div className="flex items-center justify-around">
 
           
           <div className="hidden lg:block">
@@ -63,7 +65,7 @@ export default function Navbar() {
                   type="button"
                   className="mx-2 rounded-md bg-black px-4 py-1 text-2xl font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                 >
-                  <ion-icon name="cart-outline"></ion-icon><sup> {cartProducts.length}</sup>
+                  <ion-icon name="cart-outline"></ion-icon><sup> {props.countpass} </sup>
                 </button>
               </Link>
 
