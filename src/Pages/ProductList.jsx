@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../Container/ProductCard";
 import Loading from "../Components/Loading";
 import Error from "../Components/Error";
+import Success from "../Components/Success";
 
 export default function Product(props) {
   const [product, setProduct] = useState([]);
@@ -19,20 +20,21 @@ export default function Product(props) {
   };
   
   useEffect(() => {
-   
     productData();
   }, [setProduct]);
 
 if(error==0){
  return (
     <>  
+    <Success/>
 {
   product.length==0?<Loading/> :
       <div className=" min-h-full py-20 px-4 max-w-screen-xl flex flex-wrap gap-x-6  justify-center gap-y-9 mx-auto">
        
         {product.map((post,i) => {
-          return <ProductCard func={props.countFunc} data={post} key={i}/>;
+          return <ProductCard func={props.cartFunc} func2={props.wishFunc} data={post} key={i}/>;
         })}
+       
        
       </div> 
 }

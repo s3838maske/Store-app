@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function ProductCard(props) {
-  let { data ,func } = props;
+  let { data ,func, func2 } = props;
 
   return (
     <div className="w-72 rounded-md border bg-white shadow-2xl">
@@ -40,7 +40,8 @@ export default function ProductCard(props) {
         <button
           type="button"
           className="flex justify-center items-center gap-1 mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-          onClick={()=>handelWishlist(data.id,data.title,data.image,data.price,data.description)}
+          onClick={()=>func2(data.id,data.title,data.image,data.price,data.description)}
+          id="addToCartBtn"
         >
         
             <ion-icon name="heart-outline"></ion-icon>

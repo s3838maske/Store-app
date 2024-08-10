@@ -56,7 +56,7 @@ export default function Navbar(props) {
                   type="button"
                   className="rounded-md bg-black px-4 py-1 text-2xl font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                 >
-                  <ion-icon name="heart"></ion-icon><sup> {wishlistProduct.length} </sup>
+                  <ion-icon name="heart"></ion-icon><sup> {props.wishlistCount.length} </sup>
                 </button>
               </Link>
 
@@ -65,7 +65,7 @@ export default function Navbar(props) {
                   type="button"
                   className="mx-2 rounded-md bg-black px-4 py-1 text-2xl font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                 >
-                  <ion-icon name="cart-outline"></ion-icon><sup> {props.countpass} </sup>
+                  <ion-icon name="cart-outline"></ion-icon><sup> {props.cartCount.length} </sup>
                 </button>
               </Link>
 
