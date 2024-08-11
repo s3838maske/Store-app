@@ -1,9 +1,52 @@
-import { Link } from 'react-router-dom'
+import { Link,Navigate } from 'react-router-dom'
 import React, { Component } from 'react'
+import axios from 'axios'
 
 export default class SignUp extends Component {
+  constructor(){
+    super()
+    this.state ={
+        name : "",
+        email: "",
+        password : "",
+        avatar: "https://picsum.photos/800",
+        navigate: false
+    }
+  }
+
+
+  
+  handleUser = (e)=>{
+    const {name , value} = e.target;
+    this.setState({
+      [name] : value,
+    })
+  }
+
+  
+  handleNavigate = () => {
+    this.setState({ navigate: true });
+  }
+
+  createUserApi=()=>{
+    axios.get("https://api.escuelajs.co/api/v1/users/",{
+      name : "Shubham",
+      email: "shubham@gmail.com",
+      password : "123456",
+      avatar: "https://picsum.photos/800",
+    }).then(Response=> {console.log(Response.data)
+      this.handleNavigate()
+    })
+    .catch(Error=>console.log(Error))
+  }
+
   render() {
+    
+    if(this.state.navigate){
+      return <Navigate to={'/login'}/>
+    }
     return (
+      
      <>
       <section>
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
@@ -35,7 +78,9 @@ export default class SignUp extends Component {
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="text"
                     placeholder="Full Name"
+                    name= "name"
                     id="name"
+                    onChange={this.handleUser}
                   ></input>
                 </div>
               </div>
@@ -49,7 +94,9 @@ export default class SignUp extends Component {
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="email"
                     placeholder="Email"
+                    name= "email"
                     id="email"
+                    onChange={this.handleUser}
                   ></input>
                 </div>
               </div>
@@ -65,13 +112,16 @@ export default class SignUp extends Component {
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="password"
                     placeholder="Password"
+                    name= "password"
                     id="password"
+                    onChange={this.handleUser}
                   ></input>
                 </div>
               </div>
               <div>
                 <button
                   type="button"
+                  onClick={this.createUserApi}
                   className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                 >
                   Create Account

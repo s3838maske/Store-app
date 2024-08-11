@@ -1,12 +1,76 @@
+import axios from 'axios'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 
 export default class SignIn extends React.Component{
+
+  constructor(props){
+    super()
+    this.state = {
+      email : "",
+      password : "",
+      navigate: false,
+      token: ""
+    }
+  }
+
+  handleUser = (e)=>{
+    const {name , value} = e.target;
+    this.setState({
+      [name] : value,
+    })
+  }
+
+
+  handleNavigate = () => {
+    this.setState({ navigate: true });
+    
+  }
+
+  userApi =()=> {
+    axios.post("https://api.escuelajs.co/api/v1/auth/login",
+   {
+   email : this.state.email,
+   password : this.state.password
+   }).then(Response => {
+    this.setState({token : Response.data.access_token})
+    toast.success('Successfully Login !!',
+      {position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+   this.handleNavigate()
+   })
+   .catch(Error=> {console.log(Error)
+    toast.error("Invalid Email and Password", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      })
+   })
+
+ }
+
   render() {
+
+    if(this.state.navigate){
+      return <Navigate to={'/'}/>
+    }
+
     return (
       <>
       <section>
+
           <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
             <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md bg-white p-7 rounded-xl shadow-2xl">
               <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl">Sign in</h2>
@@ -33,7 +97,10 @@ export default class SignIn extends React.Component{
                       <input
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                         type="email"
+                        name= "email"
+                        onChange={this.handleUser}
                         placeholder="Email"
+                        required
                       ></input>
                     </div>
                   </div>
@@ -56,6 +123,9 @@ export default class SignIn extends React.Component{
                       <input
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                         type="password"
+                        name='password'
+                        onChange={this.handleUser}
+                        required
                         placeholder="Password"
                       ></input>
                     </div>
@@ -63,6 +133,7 @@ export default class SignIn extends React.Component{
                   <div>
                     <button
                       type="button"
+                      onClick={this.userApi}
                       className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                     >
                       Sign In

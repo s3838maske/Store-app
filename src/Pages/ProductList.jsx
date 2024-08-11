@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../Container/ProductCard";
 import Loading from "../Components/Loading";
 import Error from "../Components/Error";
-import Success from "../Components/Success";
+
+
 
 export default function Product(props) {
   const [product, setProduct] = useState([]);
@@ -26,7 +27,6 @@ export default function Product(props) {
 if(error==0){
  return (
     <>  
-    <Success/>
 {
   product.length==0?<Loading/> :
       <div className=" min-h-full py-20 px-4 max-w-screen-xl flex flex-wrap gap-x-6  justify-center gap-y-9 mx-auto">

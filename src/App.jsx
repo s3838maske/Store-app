@@ -1,5 +1,6 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Navigate, Route, Routes } from "react-router-dom";
 import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
 import Product from "./Pages/ProductList";
@@ -14,6 +15,8 @@ export default class App extends React.Component {
       count: 0,
       cartProducts: [],
       wishlistItems: [],
+      currentUser: "",
+      // loginNavigate : false
     };
     this.cart = [];
     this.wishList = [];
@@ -22,60 +25,111 @@ export default class App extends React.Component {
     this.addToCart = this.addToCart.bind(this);
   }
 
+  handleUser(token){
+    this.setState({currentUser : token})
+  }
+
+  // handleUserNavigate(){
+  //   this.setState({loginNavigate : true})
+  // }
+
   addToCart(id, name, imgSrc, price, desc) {
-    
-    let isItemInCart = false
+    let isItemInCart = false;
 
-    this.cart.forEach((items)=>{
-       if( items.id === id){
-      isItemInCart = true;
-       }
+    this.cart.forEach((items) => {
+      if (items.id === id) {
+        isItemInCart = true;
+      }
     });
-    
-    if (!isItemInCart) {
-      this.cart.push({
-        id: id,
-        title: name,
-        price: price,
-        imageSrc: imgSrc,
-        desc: desc,
-      });
 
-      this.setState({ cartProducts: this.cart });
-      successModalShow()
-      console.log("Item added to cart:", this.cart);
+    if (this.state.currentUser) {
+      if (!isItemInCart) {
+        this.cart.push({
+          id: id,
+          title: name,
+          price: price,
+          imageSrc: imgSrc,
+          desc: desc,
+        });
+
+        this.setState({ cartProducts: this.cart });
+        toast.success("Added To Cart Successfully !!", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      } else {
+        toast.info("Product already exist", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
     } else {
-      console.log("Item already in cart.");
+      // this.handleUserNavigate()
+      window.location.href = "/login";
     }
   }
 
-  
   addToWishlist(id, name, imgSrc, price, desc) {
     let isItemInWish = false;
 
-    this.wishList.forEach((value)=>{
-      if(value.id === id){
-          isItemInWish = true;
+    this.wishList.forEach((value) => {
+      if (value.id === id) {
+        isItemInWish = true;
       }
-    })
+    });
 
-    if(!isItemInWish){
+    if (this.state.currentUser) {
+      if (!isItemInWish) {
+        this.wishList.push({
+          id: id,
+          title: name,
+          price: price,
+          imageSrc: imgSrc,
+          desc: desc,
+        });
+        this.setState({ wishlistItems: this.wishList });
+        toast.success("Added To Wishlist Successfully !!", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      } else {
+        toast.info("Product already exist", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+    } else {
+      // this.handleUserNavigate()
+      window.location.href = "/login";
+    }
+  }
 
-      this.wishList.push({
-        id: id,
-        title: name,
-        price: price,
-        imageSrc: imgSrc,
-        desc: desc,
-      });
-      this.setState({ wishlistItems: this.wishList });
-      successModalShow()
-    }else{
-      console.log("item already exist");
-    }
-    }
-    
   render() {
+    // if(this.state.loginNavigate){
+    //   console.log("call login");
+    //   return <Navigate to={'cart'}/>
+    // }
+
     return (
       <>
         <Routes>
@@ -92,7 +146,7 @@ export default class App extends React.Component {
                 />
               }
             />
-            <Route path="login" element={<SignIn />} />
+            <Route path="login" element={<SignIn  handlelogin={this.handleUser} />} />
             <Route path="signup" element={<SignUp />} />
             <Route
               path="cart"
@@ -100,7 +154,12 @@ export default class App extends React.Component {
             />
             <Route
               path="wishlist"
-              element={<Wishlist cartFunc={this.addToCart} wishlistProduct={this.state.wishlistItems} />}
+              element={
+                <Wishlist
+                  cartFunc={this.addToCart}
+                  wishlistProduct={this.state.wishlistItems}
+                />
+              }
             />
           </Route>
         </Routes>
