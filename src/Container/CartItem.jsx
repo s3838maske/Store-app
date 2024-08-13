@@ -4,7 +4,7 @@ export default function CartItem(props) {
   return (
     <>
       <ul role="list" className="divide-y divide-gray-200">
-        {props.cart.map((product, productIdx) => (
+        {props.cart.map((product) => (
           <div key={product.id} className="">
             <li className="flex py-6 sm:py-6 ">
               <div className="flex-shrink-0">

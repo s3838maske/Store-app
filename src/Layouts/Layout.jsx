@@ -5,11 +5,11 @@ import { Outlet } from 'react-router-dom'
 
 export default function Layout(props) {
 
-  let{cart , wishList} = props;
+  let{cart , wishList, isLogin} = props;
 
   return (
     <>
-    <Navbar cartCount={cart} wishlistCount={wishList} />
+    <Navbar auth={isLogin} cartCount={cart} wishlistCount={wishList} />
     <Outlet/>
     <Footer/>
     </>

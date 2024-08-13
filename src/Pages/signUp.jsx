@@ -1,6 +1,8 @@
 import { Link,Navigate } from 'react-router-dom'
 import React, { Component } from 'react'
 import axios from 'axios'
+import { toast } from 'react-toastify'
+
 
 export default class SignUp extends Component {
   constructor(){
@@ -29,15 +31,37 @@ export default class SignUp extends Component {
   }
 
   createUserApi=()=>{
-    axios.get("https://api.escuelajs.co/api/v1/users/",{
-      name : "Shubham",
-      email: "shubham@gmail.com",
-      password : "123456",
+    axios.post("https://api.escuelajs.co/api/v1/users/",{
+      name : this.state.name,
+      email: this.state.email,
+      password : this.state.password,
       avatar: "https://picsum.photos/800",
     }).then(Response=> {console.log(Response.data)
+      
+      toast.success('Account Created Successfully !!',
+        {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       this.handleNavigate()
     })
-    .catch(Error=>console.log(Error))
+    .catch(Error => {
+      console.log(Error)
+      toast.error("Invalid Information", {   
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        })
+    })
   }
 
   render() {

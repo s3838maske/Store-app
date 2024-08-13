@@ -15,8 +15,7 @@ export default class App extends React.Component {
       count: 0,
       cartProducts: [],
       wishlistItems: [],
-      currentUser: "",
-      // loginNavigate : false
+      isLogin: true,
     };
     this.cart = [];
     this.wishList = [];
@@ -25,13 +24,9 @@ export default class App extends React.Component {
     this.addToCart = this.addToCart.bind(this);
   }
 
-  handleUser(token){
-    this.setState({currentUser : token})
+  handleUser() {
+    this.setState({ isLogin: false });
   }
-
-  // handleUserNavigate(){
-  //   this.setState({loginNavigate : true})
-  // }
 
   addToCart(id, name, imgSrc, price, desc) {
     let isItemInCart = false;
@@ -42,7 +37,7 @@ export default class App extends React.Component {
       }
     });
 
-    if (this.state.currentUser) {
+    if (this.state.isLogin) {
       if (!isItemInCart) {
         this.cart.push({
           id: id,
@@ -88,7 +83,7 @@ export default class App extends React.Component {
       }
     });
 
-    if (this.state.currentUser) {
+    if (this.state.isLogin) {
       if (!isItemInWish) {
         this.wishList.push({
           id: id,
@@ -125,17 +120,18 @@ export default class App extends React.Component {
   }
 
   render() {
-    // if(this.state.loginNavigate){
-    //   console.log("call login");
-    //   return <Navigate to={'cart'}/>
-    // }
-
     return (
       <>
         <Routes>
           <Route
             path="/"
-            element={<Layout cart={this.cart} wishList={this.wishList} />}
+            element={
+              <Layout
+                isLogin={this.state.isLogin}
+                cart={this.cart}
+                wishList={this.wishList}
+              />
+            }
           >
             <Route
               index
@@ -146,7 +142,7 @@ export default class App extends React.Component {
                 />
               }
             />
-            <Route path="login" element={<SignIn  handlelogin={this.handleUser} />} />
+            <Route path="login" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />
             <Route
               path="cart"

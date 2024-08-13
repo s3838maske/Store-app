@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
+  // const [token, setToken] = useState("");
 
+  function logout() {
+    localStorage.removeItem("currentUserToken")
+  }
 
+  // useEffect(()=>{
+  //   setToken(props.);
+  //   //   console.log(localStorage.getItem("currentUserToken"));
+  //   // }
+  // },[])
 
   return (
     <>
@@ -19,67 +28,75 @@ export default function Navbar(props) {
           </div>
 
           <div className="flex items-center justify-around">
-
-          
-          <div className="hidden lg:block">
-            <ul className="inline-flex space-x-8">
-              <li>
-                <Link
-                  to={"/"}
-                  className="text-sm font-semibold text-gray-800 hover:text-gray-900"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to={"/"}
-                  className="text-sm font-semibold text-gray-800 hover:text-gray-900"
-                >
-                  About
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div className="hidden lg:block ">
-            <div className="flex items-center">
-              <div className="flex grow justify-center">
-                <input
-                  className="flex h-10 w-[250px] mx-3 rounded-md bg-gray-100 px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                  type="text"
-                  placeholder="Serach"
-                ></input>
-              </div>
-              <Link to={"wishlist"}>
-                <button
-                  type="button"
-                  className="rounded-md bg-black px-4 py-1 text-2xl font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                >
-                  <ion-icon name="heart"></ion-icon><sup> {props.wishlistCount.length} </sup>
-                </button>
-              </Link>
-
-              <Link to={"cart"}>
-                <button
-                  type="button"
-                  className="mx-2 rounded-md bg-black px-4 py-1 text-2xl font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                >
-                  <ion-icon name="cart-outline"></ion-icon><sup> {props.cartCount.length} </sup>
-                </button>
-              </Link>
-
-              <Link to={"/login"}>
-                <button
-                  type="button"
-                  className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                >
-                  Log In
-                </button>
-              </Link>
+            <div className="hidden lg:block">
+              <ul className="inline-flex space-x-8">
+                <li>
+                  <Link
+                    to={"/"}
+                    className="text-sm font-semibold text-gray-800 hover:text-gray-900"
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/"}
+                    className="text-sm font-semibold text-gray-800 hover:text-gray-900"
+                  >
+                    About
+                  </Link>
+                </li>
+              </ul>
             </div>
-          </div>
 
+            <div className="hidden lg:block ">
+              <div className="flex items-center">
+                <div className="flex grow justify-center">
+                  <input
+                    className="flex h-10 w-[250px] mx-3 rounded-md bg-gray-100 px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                    type="text"
+                    placeholder="Serach"
+                  ></input>
+                </div>
+                <Link to={"wishlist"}>
+                  <button
+                    type="button"
+                    className="rounded-md bg-black px-4 py-1 text-2xl font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                  >
+                    <ion-icon name="heart"></ion-icon>
+                    <sup> {props.wishlistCount.length} </sup>
+                  </button>
+                </Link>
+
+                <Link to={"cart"}>
+                  <button
+                    type="button"
+                    className="mx-2 rounded-md bg-black px-4 py-1 text-2xl font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                  >
+                    <ion-icon name="cart-outline"></ion-icon>
+                    <sup> {props.cartCount.length} </sup>
+                  </button>
+                </Link>
+                {!props.auth ? (
+                  <Link to={"/login"}>
+                    <button
+                      type="button"
+                      className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                    >
+                      Log In
+                    </button>
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={logout}
+                    className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                  >
+                    Log Out
+                  </button>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>

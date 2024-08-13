@@ -11,8 +11,7 @@ export default class SignIn extends React.Component{
     this.state = {
       email : "",
       password : "",
-      navigate: false,
-      token: ""
+      navigate: false
     }
   }
 
@@ -26,7 +25,6 @@ export default class SignIn extends React.Component{
 
   handleNavigate = () => {
     this.setState({ navigate: true });
-    
   }
 
   userApi =()=> {
@@ -35,9 +33,10 @@ export default class SignIn extends React.Component{
    email : this.state.email,
    password : this.state.password
    }).then(Response => {
-    this.setState({token : Response.data.access_token})
+    JSON.stringify(localStorage.setItem("currentUserToken", Response?.data.access_token))
     toast.success('Successfully Login !!',
-      {position: "top-center",
+      {
+      position: "top-center",
       autoClose: 3000,
       hideProgressBar: false,
       pauseOnHover: true,
@@ -48,7 +47,7 @@ export default class SignIn extends React.Component{
    this.handleNavigate()
    })
    .catch(Error=> {console.log(Error)
-    toast.error("Invalid Email and Password", {
+    toast.error("Invalid Email and Password", {   
       position: "top-center",
       autoClose: 3000,
       hideProgressBar: false,
@@ -57,9 +56,10 @@ export default class SignIn extends React.Component{
       progress: undefined,
       theme: "colored",
       })
-   })
+   })  
 
  }
+ 
 
   render() {
 
