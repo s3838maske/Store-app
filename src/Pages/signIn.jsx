@@ -13,6 +13,8 @@ export default class SignIn extends React.Component{
       password : "",
       navigate: false
     }
+
+    this.handleValidation = this.handleValidation.bind(this)
   }
 
   handleUser = (e)=>{
@@ -27,6 +29,24 @@ export default class SignIn extends React.Component{
     this.setState({ navigate: true });
   }
 
+
+  handleValidation(){
+    if(!this.state.email){
+      toast.error("Enter Valid Email & Password" ,{   
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        })
+    }else{
+      setTimeout(()=>this.userApi(),5000)
+    }
+    return 
+  }
+
   userApi =()=> {
     axios.post("https://api.escuelajs.co/api/v1/auth/login",
    {
@@ -34,6 +54,8 @@ export default class SignIn extends React.Component{
    password : this.state.password
    }).then(Response => {
     JSON.stringify(localStorage.setItem("currentUserToken", Response?.data.access_token))
+    this.props.checkUserFunction()
+    this.props?.userAuthApi()
     toast.success('Successfully Login !!',
       {
       position: "top-center",
@@ -47,7 +69,7 @@ export default class SignIn extends React.Component{
    this.handleNavigate()
    })
    .catch(Error=> {console.log(Error)
-    toast.error("Invalid Email and Password", {   
+    toast.error(Error.message ,{   
       position: "top-center",
       autoClose: 3000,
       hideProgressBar: false,
@@ -57,9 +79,9 @@ export default class SignIn extends React.Component{
       theme: "colored",
       })
    })  
+  
 
  }
- 
 
   render() {
 
@@ -76,14 +98,10 @@ export default class SignIn extends React.Component{
               <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl">Sign in</h2>
               <p className="mt-2 text-sm text-gray-600">
                 Don&apos;t have an account?{' '}
-                <Link to={"/signUp"}>
-                <a
-                  href="#"
-                  title=""
-                  className="font-semibold text-black transition-all duration-200 hover:underline"
-                  >
-                  Create a free account
-                </a>
+                <Link 
+                className="font-semibold text-black transition-all duration-200 hover:underline"
+                to={"/signUp"}>
+                  Create a account 
                   </Link>
               </p>
               <form action="#" method="POST" className="mt-8">
@@ -110,14 +128,14 @@ export default class SignIn extends React.Component{
                         {' '}
                         Password{' '}
                       </label>
-                      <a
+                      <p
                         href="#"
                         title=""
                         className="text-sm font-semibold text-black hover:underline"
                       >
                         {' '}
                         Forgot password?{' '}
-                      </a>
+                      </p>
                     </div>
                     <div className="mt-2">
                       <input
@@ -133,7 +151,7 @@ export default class SignIn extends React.Component{
                   <div>
                     <button
                       type="button"
-                      onClick={this.userApi}
+                      onClick={this.handleValidation}
                       className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                     >
                       Sign In

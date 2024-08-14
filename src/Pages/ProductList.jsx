@@ -32,9 +32,9 @@ if(error==0){
       <div className=" min-h-full py-20 px-4 max-w-screen-xl flex flex-wrap gap-x-6  justify-center gap-y-9 mx-auto">
        
         {product.map((post,i) => {
-          return <ProductCard func={props.cartFunc} func2={props.wishFunc} data={post} key={i}/>;
+          return <ProductCard isLogin={props.isLogin} addToCartfunc={props.cartFunc} addToWishlistfunc={props.wishFunc} data={post} key={i}/>;
         })}
-       
+      
        
       </div> 
 }

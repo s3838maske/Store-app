@@ -1,12 +1,13 @@
 import React from "react";
 import { toast } from "react-toastify";
-import { Navigate, Route, Routes } from "react-router-dom";
+import {  Route, Routes } from "react-router-dom";
 import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
 import Product from "./Pages/ProductList";
 import Wishlist from "./Pages/WishList";
 import Cart from "./Pages/Cart";
 import Layout from "./Layouts/Layout.jsx";
+import axios from "axios";
 
 export default class App extends React.Component {
   constructor() {
@@ -15,18 +16,35 @@ export default class App extends React.Component {
       count: 0,
       cartProducts: [],
       wishlistItems: [],
-      isLogin: true,
+      isLogin: false,
+      currentUser: ''
     };
     this.cart = [];
     this.wishList = [];
 
     this.addToWishlist = this.addToWishlist.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.handleAuthentication = this.handleAuthentication.bind(this);
+    this.userAuthApi = this.userAuthApi.bind(this);
   }
 
-  handleUser() {
-    this.setState({ isLogin: false });
+  handleAuthentication(){
+    if(!localStorage.getItem("currentUserToken")){
+      this.setState({ isLogin: false });
+      this.setState({ currentUser: ''});
+    }else{
+      this.setState({ isLogin: true })
+    }
   }
+
+  componentDidMount(){
+    this.handleAuthentication()
+  }
+
+  componentDidUpdate(){
+    console.log(this.state);
+  }
+
 
   addToCart(id, name, imgSrc, price, desc) {
     let isItemInCart = false;
@@ -37,7 +55,7 @@ export default class App extends React.Component {
       }
     });
 
-    if (this.state.isLogin) {
+    
       if (!isItemInCart) {
         this.cart.push({
           id: id,
@@ -68,10 +86,7 @@ export default class App extends React.Component {
           theme: "colored",
         });
       }
-    } else {
-      // this.handleUserNavigate()
-      window.location.href = "/login";
-    }
+    
   }
 
   addToWishlist(id, name, imgSrc, price, desc) {
@@ -83,7 +98,7 @@ export default class App extends React.Component {
       }
     });
 
-    if (this.state.isLogin) {
+    
       if (!isItemInWish) {
         this.wishList.push({
           id: id,
@@ -113,11 +128,25 @@ export default class App extends React.Component {
           theme: "colored",
         });
       }
-    } else {
-      // this.handleUserNavigate()
-      window.location.href = "/login";
+    
+  }
+
+  async userAuthApi(){
+    try {
+      const response = await axios.get("https://api.escuelajs.co/api/v1/auth/profile", {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("currentUserToken")}`
+        },
+      });
+      this.setState({ currentUser: response.data.name });
+      console.log(this.state.currentUser);
+    } catch (error) {
+      console.log(error);
     }
   }
+  
+
 
   render() {
     return (
@@ -126,10 +155,12 @@ export default class App extends React.Component {
           <Route
             path="/"
             element={
-              <Layout
+              <Layout 
+              currentUser={this.state.currentUser}
                 isLogin={this.state.isLogin}
                 cart={this.cart}
                 wishList={this.wishList}
+                checkUserFunction={this.handleAuthentication}
               />
             }
           >
@@ -137,12 +168,13 @@ export default class App extends React.Component {
               index
               element={
                 <Product
+                isLogin={this.state.isLogin}
                   cartFunc={this.addToCart}
                   wishFunc={this.addToWishlist}
                 />
               }
             />
-            <Route path="login" element={<SignIn />} />
+            <Route path="login" element={<SignIn checkUserFunction={this.handleAuthentication} userAuthApi={this.userAuthApi} />} />
             <Route path="signup" element={<SignUp />} />
             <Route
               path="cart"

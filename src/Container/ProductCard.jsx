@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function ProductCard(props) {
-  let { data ,func, func2 } = props;
+  let { data, addToCartfunc, addToWishlistfunc, isLogin } = props;
 
   return (
     <div className="w-72 rounded-md border bg-white shadow-2xl">
@@ -24,29 +25,69 @@ export default function ProductCard(props) {
             {data.price}/-
           </span>
         </div>
-        <button
-          type="button"
-          className="flex justify-center items-center gap-1 mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-          // onClick={()=> handleCart(data.id,data.title,data.image,data.price,data.description)}
-          onClick={()=> func(data.id,data.title,data.image,data.price,data.description)}
-          // onClick={func}
-     
-        >
+        {!isLogin ? (
          
+         <>
+         <Link to={'/login'}>
+           <button
+             type="button"
+             className="flex justify-center items-center gap-1 mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+           >
+             <ion-icon name="cart-outline"></ion-icon>
+             Add to Cart
+           </button>
+           </Link>
+
+           <Link to={'/login'}>
+           <button
+             type="button"
+             className="flex justify-center items-center gap-1 mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+           >
+             <ion-icon name="heart-outline"></ion-icon>
+             Add to Wishlist
+           </button>
+           </Link>
+         </>
+
+        ) : (
+
+          <>
+          <button
+            type="button"
+            className="flex justify-center items-center gap-1 mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            onClick={() =>
+              addToCartfunc(
+                data.id,
+                data.title,
+                data.image,
+                data.price,
+                data.description
+              )
+            }
+          >
             <ion-icon name="cart-outline"></ion-icon>
-          
-          Add to Cart
-        </button>
-        <button
-          type="button"
-          className="flex justify-center items-center gap-1 mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-          onClick={()=>func2(data.id,data.title,data.image,data.price,data.description)}
-          id="addToCartBtn"
-        >
-        
+            Add to Cart
+          </button>
+          <button
+            type="button"
+            className="flex justify-center items-center gap-1 mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            onClick={() =>
+              addToWishlistfunc(
+                data.id,
+                data.title,
+                data.image,
+                data.price,
+                data.description
+              )
+            }
+            id="addToCartBtn"
+          >
             <ion-icon name="heart-outline"></ion-icon>
-          Add to Wishlist
-        </button>
+            Add to Wishlist
+          </button>
+        </>
+
+        )}
       </div>
     </div>
   );

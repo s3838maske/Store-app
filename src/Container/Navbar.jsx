@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link,  } from "react-router-dom";
 
 export default function Navbar(props) {
-  // const [token, setToken] = useState("");
-
   function logout() {
-    localStorage.removeItem("currentUserToken")
+    localStorage.removeItem("currentUserToken");
+    props.checkUserFunction();
   }
-
-  // useEffect(()=>{
-  //   setToken(props.);
-  //   //   console.log(localStorage.getItem("currentUserToken"));
-  //   // }
-  // },[])
 
   return (
     <>
@@ -77,6 +70,8 @@ export default function Navbar(props) {
                     <sup> {props.cartCount.length} </sup>
                   </button>
                 </Link>
+
+              
                 {!props.auth ? (
                   <Link to={"/login"}>
                     <button
@@ -87,6 +82,10 @@ export default function Navbar(props) {
                     </button>
                   </Link>
                 ) : (
+                  <>
+                  <div className="mx-2 text-lg text-blue-900 font-bold">
+                  Welcome, {props.currentUserName}
+                </div>
                   <button
                     type="button"
                     onClick={logout}
@@ -94,6 +93,7 @@ export default function Navbar(props) {
                   >
                     Log Out
                   </button>
+                  </>
                 )}
               </div>
             </div>

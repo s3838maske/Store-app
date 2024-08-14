@@ -52,7 +52,7 @@ export default class SignUp extends Component {
     })
     .catch(Error => {
       console.log(Error)
-      toast.error("Invalid Information", {   
+      toast.error(Error.message, {   
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
