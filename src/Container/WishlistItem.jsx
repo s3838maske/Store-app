@@ -5,7 +5,7 @@ export default function WishlistItem(props) {
 
   return (
     <>
-      <ul className="flex flex-col divide-y divide-gray-200">
+      <ul className="bg-white flex flex-col divide-y divide-gray-200">
           <li
             
             className="flex flex-col py-6 sm:flex-row sm:justify-between"

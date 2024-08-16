@@ -4,18 +4,19 @@ import CartItem from '../Container/CartItem'
 export default function Cart(props) {
   return (
    <>
-    <div className="mt-20 mx-auto max-w-7xl px-2 lg:px-0">
+    <div className="h-screen mt-20 mx-auto max-w-7xl px-2 lg:px-0">
       <div className="mx-auto max-w-2xl py-8 lg:max-w-7xl">
         <h1 className="text-3xl font-bold tracking-tight text-black sm:text-4xl">
           Shopping Cart
         </h1>
         <form className="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
-          <section aria-labelledby="cart-heading" className="rounded-lg bg-white lg:col-span-8">
+          <section aria-labelledby="cart-heading" className="rounded-lg lg:col-span-8">
             <h2 id="cart-heading" className="sr-only">
               Items in your shopping cart
             </h2>
-
-            <CartItem cart={props.cartProduct}/>
+            {props.cartProduct.length===0?(<h1 className='text-4xl text-center font-semibold text-gray-600'>No Product Available</h1>):
+            (<CartItem cart={props.cartProduct}/>)
+          }
           </section>
           {/* Order summary */}
           <section

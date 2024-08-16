@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 export default function ProductCard(props) {
   let { data, addToCartfunc, addToWishlistfunc, isLogin } = props;
 
+
   return (
     <div className="w-72 rounded-md border bg-white shadow-2xl">
       <img

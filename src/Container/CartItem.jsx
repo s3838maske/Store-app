@@ -3,7 +3,7 @@ import React from "react";
 export default function CartItem(props) {
   return (
     <>
-      <ul role="list" className="divide-y divide-gray-200">
+      <ul role="list" className="bg-white rounded-lg divide-y divide-gray-200">
         {props.cart.map((product) => (
           <div key={product.id} className="">
             <li className="flex py-6 sm:py-6 ">

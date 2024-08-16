@@ -1,5 +1,5 @@
 import React from "react";
-import { Link,  } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
   function logout() {
@@ -71,7 +71,6 @@ export default function Navbar(props) {
                   </button>
                 </Link>
 
-              
                 {!props.auth ? (
                   <Link to={"/login"}>
                     <button
@@ -83,16 +82,16 @@ export default function Navbar(props) {
                   </Link>
                 ) : (
                   <>
-                  <div className="mx-2 text-lg text-blue-900 font-bold">
-                  Welcome, {props.currentUserName}
-                </div>
-                  <button
-                    type="button"
-                    onClick={logout}
-                    className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                  >
-                    Log Out
-                  </button>
+                    <div className="mx-2 text-lg text-blue-900 font-bold">
+                     👋Welcome, {props.currentUserName}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={logout}
+                      className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                    >
+                      Log Out
+                    </button>
                   </>
                 )}
               </div>
