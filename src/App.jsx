@@ -8,6 +8,7 @@ import Wishlist from "./Pages/WishList";
 import Cart from "./Pages/Cart";
 import Layout from "./Layouts/Layout.jsx";
 import axios from "axios";
+import NotFound from "./Pages/NotFound.jsx";
 
 
 export default class App extends React.Component {
@@ -145,6 +146,7 @@ export default class App extends React.Component {
   render() {
     return (
       <>
+       {this.state.isLogin?
         <Routes>
           <Route
             path="/"
@@ -169,17 +171,6 @@ export default class App extends React.Component {
               }
             />
             <Route
-              path="login"
-              element={
-                <SignIn
-                isLogin={this.state.isLogin}
-                  checkUserFunction={this.handleAuthentication}
-                  userAuthApi={this.userAuthApi}
-                />
-              }
-            />
-            <Route path="signup" element={<SignUp />} />
-            <Route
               path="cart"
               element={<Cart cartProduct={this.state.cartProducts} />}
             />
@@ -193,8 +184,47 @@ export default class App extends React.Component {
               }
             />
           </Route>
+          <Route path="*" element={<NotFound />} ></Route>
         </Routes>
-
+        :
+        <Routes>
+        <Route
+          path="/"
+          element={
+            <Layout
+              currentUser={this.state.currentUser}
+              isLogin={this.state.isLogin}
+              cart={this.cart}
+              wishList={this.wishList}
+              checkUserFunction={this.handleAuthentication}
+            />
+          }
+        >
+          <Route
+            index
+            element={
+              <Product
+                isLogin={this.state.isLogin}
+                cartFunc={this.addToCart}
+                wishFunc={this.addToWishlist}
+              />
+            }
+          />
+          <Route
+            path="login"
+            element={
+              <SignIn
+              isLogin={this.state.isLogin}
+                checkUserFunction={this.handleAuthentication}
+                userAuthApi={this.userAuthApi}
+              />
+            }
+          />
+          <Route path="signup" element={<SignUp />} />
+        </Route>
+          <Route path="*" element={<NotFound />} ></Route>
+      </Routes>
+        }
       </>
     );
   }

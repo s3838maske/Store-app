@@ -30,6 +30,12 @@ export default class SignUp extends Component {
 
   
  
+  componentDidMount(){
+    if (localStorage.getItem("currentUserToken")) {
+      window.location.href = '/'
+    }
+  }
+
   handleValidation = () => {
     const { email, password, name } = this.state;
 

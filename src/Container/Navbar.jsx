@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Navbar(props) {
   function logout() {
@@ -12,32 +12,46 @@ export default function Navbar(props) {
       <div className="fixed top-0 w-full bg-white z-10 shadow-xl">
         <div className="mx-auto flex max-w-8xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <div className="inline-flex items-center space-x-2">
-            <Link to={"/"}>
+            <NavLink to={"/"}>
               <span className="font-bold text-3xl flex items-center gap-1">
                 {" "}
                 <ion-icon name="bag-handle-outline"></ion-icon> Store
               </span>{" "}
-            </Link>
+            </NavLink>
           </div>
 
           <div className="flex items-center justify-around">
             <div className="hidden lg:block">
               <ul className="inline-flex space-x-8">
                 <li>
-                  <Link
+                  <NavLink
                     to={"/"}
+                    style={({ isActive, isPending, isTransitioning }) => {
+                      return {
+                        fontWeight: isActive ? "bold" : "",
+                        color: isPending ? "red" : "black",
+                        viewTransitionName: isTransitioning ? "slide" : "",
+                      };
+                    }}
                     className="text-sm font-semibold text-gray-800 hover:text-gray-900"
                   >
                     Home
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link
-                    to={"/"}
+                  <NavLink
+                    to={"/about"}
+                    style={({ isActive, isPending, isTransitioning }) => {
+                      return {
+                        fontWeight: isActive ? "bold" : "",
+                        color: isPending ? "red" : "black",
+                        viewTransitionName: isTransitioning ? "slide" : "",
+                      };
+                    }}
                     className="text-sm font-semibold text-gray-800 hover:text-gray-900"
                   >
                     About
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </div>
@@ -51,7 +65,7 @@ export default function Navbar(props) {
                     placeholder="Serach"
                   ></input>
                 </div>
-                <Link to={"wishlist"}>
+                <NavLink to={"wishlist"}>
                   <button
                     type="button"
                     className="rounded-md bg-black px-4 py-1 text-2xl font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
@@ -59,9 +73,9 @@ export default function Navbar(props) {
                     <ion-icon name="heart"></ion-icon>
                     <sup> {props.wishlistCount.length} </sup>
                   </button>
-                </Link>
+                </NavLink>
 
-                <Link to={"cart"}>
+                <NavLink to={"cart"}>
                   <button
                     type="button"
                     className="mx-2 rounded-md bg-black px-4 py-1 text-2xl font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
@@ -69,17 +83,17 @@ export default function Navbar(props) {
                     <ion-icon name="cart-outline"></ion-icon>
                     <sup> {props.cartCount.length} </sup>
                   </button>
-                </Link>
+                </NavLink>
 
                 {!props.auth ? (
-                  <Link to={"/login"}>
+                  <NavLink to={"/login"}>
                     <button
                       type="button"
                       className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                     >
                       Log In
                     </button>
-                  </Link>
+                  </NavLink>
                 ) : (
                   <>
                     <div className="mx-2 text-lg text-blue-900 font-bold">

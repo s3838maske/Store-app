@@ -17,6 +17,12 @@ export default class SignIn extends React.Component {
     this.handleValidation = this.handleValidation.bind(this);
   }
 
+  componentDidMount(){
+    if (localStorage.getItem("currentUserToken")) {
+      window.location.href = '/'
+    }
+  }
+
   handleUser = (e) => {
     const { name, value } = e.target;
     this.setState({
@@ -61,7 +67,7 @@ export default class SignIn extends React.Component {
         JSON.stringify(
           localStorage.setItem("currentUserToken", Response?.data.access_token)
         );
-        this.props.checkUserFunction();
+        this.props?.checkUserFunction();
         this.props?.userAuthApi();
         toast.success("Successfully Login !!", {
           position: "top-center",
