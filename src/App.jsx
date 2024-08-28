@@ -10,7 +10,6 @@ import Layout from "./Layouts/Layout.jsx";
 import axios from "axios";
 import NotFound from "./Pages/NotFound.jsx";
 import Private from "./Routes/PrivateRoute.jsx";
-import Counter from "./Components/Counter.jsx";
 
 
 export default class App extends React.Component {
@@ -174,10 +173,6 @@ export default class App extends React.Component {
             <Route
               path="cart"
               element={<Cart cartProduct={this.state.cartProducts} />}
-            />
-               <Route
-              path="counter"
-              element={ <Counter /> }
             />
             <Route
               path="wishlist"

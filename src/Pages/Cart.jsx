@@ -1,7 +1,8 @@
 import React from 'react'
 import CartItem from '../Container/CartItem'
+import { connect } from "react-redux";
 
-export default function Cart(props) {
+function Cart(props) {
   return (
    <>
     <div className=" mt-20 mx-auto max-w-7xl px-2 lg:px-0">
@@ -14,8 +15,8 @@ export default function Cart(props) {
             <h2 id="cart-heading" className="sr-only">
               Items in your shopping cart
             </h2>
-            {props.cartProduct.length===0?(<h1 className='text-4xl text-center font-semibold text-gray-600'>No Product Available</h1>):
-            (<CartItem cart={props.cartProduct}/>)
+            {props.cart.length===0?(<h1 className='text-4xl text-center font-semibold text-gray-600'>No Product Available</h1>):
+            (<CartItem />)
           }
           </section>
           {/* Order summary */}
@@ -61,3 +62,12 @@ export default function Cart(props) {
    </>
   )
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+     cart : state.cartProduct.cart
+  };
+};
+
+export default connect(mapStateToProps)(Cart);

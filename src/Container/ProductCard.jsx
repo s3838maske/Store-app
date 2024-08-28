@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { sagaAddToCart} from '../Store/Cart/cartAction';
 
-export default function ProductCard(props) {
+ function ProductCard(props) {
   let { data, addToCartfunc, addToWishlistfunc, isLogin } = props;
 
 
@@ -57,13 +60,7 @@ export default function ProductCard(props) {
             type="button"
             className="flex justify-center items-center gap-1 mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
             onClick={() =>
-              addToCartfunc(
-                data.id,
-                data.title,
-                data.images,
-                data.price,
-                data.description
-              )
+              props.addtocartAction(data)
             }
           >
             <ion-icon name="cart-outline"></ion-icon>
@@ -93,3 +90,21 @@ export default function ProductCard(props) {
     </div>
   );
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+     cart : state.cartProduct.cart
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      addtocartAction: sagaAddToCart,
+    },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

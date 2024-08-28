@@ -34,8 +34,6 @@ if(error==0){
         {product.map((post,i) => {
           return <ProductCard isLogin={props.isLogin} addToCartfunc={props.cartFunc} addToWishlistfunc={props.wishFunc} data={post} key={i}/>;
         })}
-      
-       
       </div> 
 }
     </>

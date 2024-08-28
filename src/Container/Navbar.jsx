@@ -1,7 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
-export default function Navbar(props) {
+function Navbar(props) {
   function logout() {
     localStorage.removeItem("currentUserToken");
     props.checkUserFunction();
@@ -81,7 +82,7 @@ export default function Navbar(props) {
                     className="mx-2 rounded-md bg-black px-4 py-1 text-2xl font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                   >
                     <ion-icon name="cart-outline"></ion-icon>
-                    <sup> {props.cartCount.length} </sup>
+                    <sup> {props.cart.length} </sup>
                   </button>
                 </NavLink>
 
@@ -116,3 +117,13 @@ export default function Navbar(props) {
     </>
   );
 }
+
+
+
+const mapStateToProps = (state) => {
+  return {
+     cart : state.cartProduct.cart
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);

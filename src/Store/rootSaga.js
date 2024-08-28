@@ -1,10 +1,9 @@
 import { all } from "redux-saga/effects";
-
-import {counterSagas} from './Counter/counterSaga';
+import {cartSagas} from './Cart/cartSaga';
 
 function* rootSaga() {
     yield all([
-        counterSagas(),
+        cartSagas()
     ]);
 }
 

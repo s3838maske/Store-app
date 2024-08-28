@@ -1,16 +1,18 @@
 import React from "react";
+import { connect } from "react-redux";
 
-export default function CartItem(props) {
+
+ function CartItem(props) {
   return (
     <>
       <ul role="list" className="bg-white rounded-lg divide-y divide-gray-200">
         {props.cart.map((product) => (
-          <div key={product.id} className="">
-            <li className="flex py-6 sm:py-6 ">
+          <div key={product.payload.id} className="">
+            <li className="flex py-6 px-5 sm:py-6 ">
               <div className="flex-shrink-0">
                 <img
-                  src={product.imageSrc}
-                  alt={product.title}
+                  src={product.payload.image}
+                  alt={product.payload.title}
                   className="sm:h-38 sm:w-38 h-24 w-24 rounded-md object-contain object-center"
                 />
               </div>
@@ -21,31 +23,23 @@ export default function CartItem(props) {
                     <div className="flex justify-between">
                       <h3 className="text-sm">
                         <a
-                          href={product.image}
+                          href={product.payload.image}
                           className="font-semibold text-black"
                         >
-                          {product.title}
+                          {product.payload.title}
                         </a>
                       </h3>
                     </div>
-                    <div className="mt-1 flex text-sm">
-                      <p className="text-sm text-gray-500">{product.color}</p>
-                      {product.size ? (
-                        <p className="ml-4 border-l border-gray-200 pl-4 text-sm text-gray-500">
-                          {product.size}
-                        </p>
-                      ) : null}
-                    </div>
                     <div className="mt-1 flex items-end">
                       <p className="text-xs font-medium text-gray-500 line-through">
-                        {product.originalPrice}
+                        {product.payload.originalPrice}
                       </p>
-                      <p className="text-sm font-medium text-gray-900">
-                        &nbsp;&nbsp;₹ {product.price}
+                      <p className="text-lg font-medium text-gray-900 text-green-600">
+                        &nbsp;&nbsp;₹ {product.payload.price}
                       </p>
                       &nbsp;&nbsp;
                       <p className="text-sm font-medium text-green-500">
-                        {product.discount}
+                        {product.payload.discount}
                       </p>
                     </div>
                   </div>
@@ -87,3 +81,11 @@ export default function CartItem(props) {
     </>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+     cart : state.cartProduct.cart
+  };
+};
+
+export default connect(mapStateToProps)(CartItem);
