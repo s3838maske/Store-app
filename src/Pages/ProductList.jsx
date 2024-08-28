@@ -14,7 +14,7 @@ export default function Product(props) {
     try {
       // const res = await axios.get("https://api.escuelajs.co/api/v1/products");
       const res = await axios.get("https://fakestoreapi.com/products");
-      setProduct(res.data);
+      setProduct(res.data.slice(6,30));
     } catch (error) {
       setError(error.message)
     }

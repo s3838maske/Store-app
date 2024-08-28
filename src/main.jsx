@@ -5,6 +5,9 @@ import "./style.css";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Provider } from "react-redux";
+import store from "./Store/index.js";
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -20,7 +23,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       theme="colored"
       transition:Bounce
     />
+  <Provider store={store}>
+
     <App />
+  </Provider>
+    
     <ToastContainer />
   </BrowserRouter>
 );

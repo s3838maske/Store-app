@@ -60,7 +60,7 @@ export default function ProductCard(props) {
               addToCartfunc(
                 data.id,
                 data.title,
-                data.image,
+                data.images,
                 data.price,
                 data.description
               )
@@ -76,7 +76,7 @@ export default function ProductCard(props) {
               addToWishlistfunc(
                 data.id,
                 data.title,
-                data.image,
+                data.images,
                 data.price,
                 data.description
               )

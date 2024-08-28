@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default class SignIn extends React.Component {
@@ -15,12 +15,6 @@ export default class SignIn extends React.Component {
     this.debounceTimer = null;
 
     this.handleValidation = this.handleValidation.bind(this);
-  }
-
-  componentDidMount(){
-    if (localStorage.getItem("currentUserToken")) {
-      window.location.href = '/'
-    }
   }
 
   handleUser = (e) => {
