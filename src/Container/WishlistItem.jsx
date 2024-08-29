@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import { sagaAddToWish} from "../Store/Wishlist/wishAction";
 
-export default function WishlistItem(props) {
+function WishlistItem(props) {
   let {wishlist , addToCart} = props
 
   return (
@@ -48,8 +50,27 @@ export default function WishlistItem(props) {
               </div>
             </div>
           </li>
-
       </ul>
     </>
   );
 }
+
+
+
+const mapStateToProps = (state) => {
+  return {
+     wishList : state.cartProduct.cart
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      addToWishAction: sagaAddToWish,
+    },
+    dispatch
+  );
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(WishlistItem);

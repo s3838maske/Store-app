@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ProductCard from "../Container/ProductCard";
-import Loading from "../Components/Loading";
-import Error from "../Components/Error";
+import Loading from "../Components/common/Loading";
+import Error from "../Components/common/Error";
 
 
 
-export default function Product(props) {
+export default function Home(props) {
   const [product, setProduct] = useState([]);
   const [error , setError] = useState('');
 

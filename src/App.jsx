@@ -1,15 +1,15 @@
 import React from "react";
 import { toast } from "react-toastify";
 import { Route, Routes } from "react-router-dom";
-import SignIn from "./Pages/SignIn";
+import SignIn from "./Pages/SignIn.jsx";
 import SignUp from "./Pages/SignUp";
-import Product from "./Pages/ProductList";
 import Wishlist from "./Pages/WishList";
 import Cart from "./Pages/Cart";
 import Layout from "./Layouts/Layout.jsx";
 import axios from "axios";
 import NotFound from "./Pages/NotFound.jsx";
 import Private from "./Routes/PrivateRoute.jsx";
+import Home from "./Pages/Home.jsx";
 
 
 export default class App extends React.Component {
@@ -163,7 +163,7 @@ export default class App extends React.Component {
             <Route
               index
               element={
-                <Product
+                <Home
                   isLogin={this.state.isLogin}
                   cartFunc={this.addToCart}
                   wishFunc={this.addToWishlist}
