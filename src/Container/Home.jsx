@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import ProductCard from "../Container/ProductCard";
+import ProductCard from "./ProductCard";
 import Loading from "../Components/common/Loading";
 import Error from "../Components/common/Error";
 

@@ -1,22 +1,29 @@
 import React from 'react'
 import WishlistItem from '../Container/WishlistItem'
+import { connect } from 'react-redux';
 
-
-export default function wishList(props) {
+ function wishList(props) {
  
     return (
       <>
        <div className="my-24 rounded-xl mx-auto flex max-w-3xl flex-col space-y-4 p-6 px-2 sm:p-10 sm:px-2">
       <h2 className="text-3xl font-bold">Your Wishlist</h2>
-      {props.wishlistProduct.length===0?<h1 className='text-4xl text-center font-semibold text-gray-600'>No Product Available</h1>:
-      props.wishlistProduct.map((value,index)=>{  
-        return(<WishlistItem addToCart={props.cartFunc} wishlist={value} key={index} />)
-      })
+     
+      {props.wishListData.length===0?(<h1 className='text-4xl text-center font-semibold text-gray-600'>No Product Available</h1>):
+            ( <WishlistItem />)
+          }
       
-
-    }
     </div>
       </>
     )
   }
 
+
+  const mapStateToProps = (state) => {
+    return {
+       wishListData : state.wishList.wishListProduct
+    };
+  };
+  
+  export default connect(mapStateToProps)(wishList);
+  

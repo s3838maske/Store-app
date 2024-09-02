@@ -9,7 +9,7 @@ import Layout from "./Layouts/Layout.jsx";
 import axios from "axios";
 import NotFound from "./Pages/NotFound.jsx";
 import Private from "./Routes/PrivateRoute.jsx";
-import Home from "./Pages/Home.jsx";
+import Home from "./Container/Home.jsx";
 
 
 export default class App extends React.Component {

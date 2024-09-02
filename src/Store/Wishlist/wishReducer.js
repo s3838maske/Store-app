@@ -1,16 +1,16 @@
 
 const initialState = {
-    wishList : [],
+    wishListProduct : [],
 }
 
-const wishList = (state = initialState , action) => {
-
+const wishListReducer = (state = initialState , action) => {
+console.log(state.wishListProduct);
     switch (action.type) {
         case "ADD_TO_WISH":
             {
                 return {
                     ...state,
-                    wishList : [...state.wishList,action.payload]
+                    wishListProduct : [...state.wishListProduct,action.payload]
                 }
             }
         
@@ -19,4 +19,4 @@ const wishList = (state = initialState , action) => {
     }
 }
 
-export default wishList;
+export default wishListReducer;

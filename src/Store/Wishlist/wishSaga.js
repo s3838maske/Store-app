@@ -9,6 +9,6 @@ function* addToWishSaga(payload){
 }
 
 export function* wishSagas(){
-    yield takeLatest ("SAGA_ADD_TO_CART", addToWishSaga)
+    yield takeLatest ("SAGA_ADD_TO_WISH", addToWishSaga)
 }
 

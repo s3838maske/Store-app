@@ -1,8 +1,7 @@
 
-import { call, put, takeLatest } from "redux-saga/effects";
+import { put, takeLatest } from "redux-saga/effects";
 
 function* addToCartSaga(payload) {
-  // console.log(payload);
   yield put({ type: "ADD_TO_CART",
               payload : payload
   });

@@ -7,7 +7,7 @@ import { connect } from "react-redux";
     <>
       <ul role="list" className="bg-white rounded-lg divide-y divide-gray-200">
         {props.cart.map((product) => (
-          <div key={product.payload.id} className="">
+          <div key={product.payload.id} >
             <li className="flex py-6 px-5 sm:py-6 ">
               <div className="flex-shrink-0">
                 <img

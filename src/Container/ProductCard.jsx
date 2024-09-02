@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { sagaAddToCart} from '../Store/Cart/cartAction';
+import { sagaAddToWish } from "../Store/Wishlist/wishAction";
 
  function ProductCard(props) {
   let { data, addToCartfunc, addToWishlistfunc, isLogin } = props;
@@ -70,13 +71,7 @@ import { sagaAddToCart} from '../Store/Cart/cartAction';
             type="button"
             className="flex justify-center items-center gap-1 mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
             onClick={() =>
-              addToWishlistfunc(
-                data.id,
-                data.title,
-                data.images,
-                data.price,
-                data.description
-              )
+              props.addToWishlist(data)
             }
             id="addToCartBtn"
           >
@@ -94,7 +89,8 @@ import { sagaAddToCart} from '../Store/Cart/cartAction';
 
 const mapStateToProps = (state) => {
   return {
-     cart : state.cartProduct.cart
+     cart : state.cartProduct.cart,
+     wishList : state.wishList.wishListProduct
   };
 };
 
@@ -102,9 +98,13 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       addtocartAction: sagaAddToCart,
+      addToWishlist : sagaAddToWish
     },
     dispatch
   );
 };
+
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);
