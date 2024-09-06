@@ -1,5 +1,4 @@
-import React from "react";
-import { toast } from "react-toastify";
+import React, { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import SignIn from "./Pages/SignIn.jsx";
 import SignUp from "./Pages/SignUp";
@@ -9,10 +8,11 @@ import Layout from "./Layouts/Layout.jsx";
 import axios from "axios";
 import NotFound from "./Pages/NotFound.jsx";
 import Private from "./Routes/PrivateRoute.jsx";
-import Home from "./Pages/Home.jsx";
-import ProductDestils  from "./Components/ProductDetails.jsx";
-
-
+import ErrorBoundary from "./Components/common/ErrorBoundary.jsx";
+// import Home from "./Pages/Home.jsx";
+// import ItemDetails from "./Pages/ItemDetails.jsx";
+const Home = lazy(() => import("./Pages/Home.jsx"));
+const ItemDetails = lazy(() => import("./Pages/ItemDetails.jsx"));
 
 class App extends React.Component {
   constructor() {
@@ -43,10 +43,9 @@ class App extends React.Component {
 
   componentDidMount() {
     this.handleAuthentication();
-    this.userAuthApi()
+    this.userAuthApi();
     // this.props.productApiAction();
   }
-
 
   // addToCart(id, name, imgSrc, price, desc) {
   //   let isItemInCart = false;
@@ -149,7 +148,6 @@ class App extends React.Component {
   render() {
     return (
       <>
-       
         <Routes>
           <Route
             path="/"
@@ -166,17 +164,21 @@ class App extends React.Component {
             <Route
               index
               element={
+                <ErrorBoundary>
+
                 <Home
                   isLogin={this.state.isLogin}
                   // cartFunc={this.addToCart}
                   // wishFunc={this.addToWishlist}
-                />
+                  />
+                  </ErrorBoundary>
               }
             />
             <Route
               path="cart"
-              element={<Cart 
-                // cartProduct={this.state.cartProducts} 
+              element={
+                <Cart
+                // cartProduct={this.state.cartProducts}
                 />
               }
             />
@@ -184,42 +186,38 @@ class App extends React.Component {
               path="wishlist"
               element={
                 <Wishlist
-                  // cartFunc={this.addToCart}
-                  // wishlistProduct={this.state.wishlistItems}
+                // cartFunc={this.addToCart}
+                // wishlistProduct={this.state.wishlistItems}
                 />
               }
             />
+            <Route path="ProductDetail/:id" element={<ItemDetails />} />
             <Route
-              path="ProductDetail/:id"
-              element={ <ProductDestils /> }
-              />
+              path="login"
+              element={
+                <Private>
+                  <SignIn
+                    isLogin={this.state.isLogin}
+                    checkUserFunction={this.handleAuthentication}
+                    userAuthApi={this.userAuthApi}
+                  />
+                </Private>
+              }
+            />
             <Route
-            path="login"
-            element={
-              <Private>
-              <SignIn
-              isLogin={this.state.isLogin}
-              checkUserFunction={this.handleAuthentication}
-              userAuthApi={this.userAuthApi}
-              />
-              </Private>
-            }
-          />
-          <Route path="signup" element={
-            <Private>
-            <SignUp />
-            </Private>
-            } />
+              path="signup"
+              element={
+                <Private>
+                  <SignUp />
+                </Private>
+              }
+            />
           </Route>
-          <Route path="*" element={<NotFound />} ></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
-      
       </>
     );
   }
 }
 
-
-
-
-export default App
+export default App;

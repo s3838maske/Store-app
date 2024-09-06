@@ -13,7 +13,7 @@ function ProductCard(props) {
     <div >
       <div className="w-72 rounded-md border bg-white shadow-2xl">
         <img
-          src={data.image}
+          src={data.images}
           alt={data.title}
           className="object-contain aspect-[16/9] w-full rounded-md md:aspect-auto md:h-[300px] lg:h-[200px]"
         />

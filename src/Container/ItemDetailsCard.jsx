@@ -1,42 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { Star, ChevronDown, UserPen } from 'lucide-react'
-import { useParams } from 'react-router-dom'
-import axios from 'axios';
+
 import { useDispatch } from 'react-redux';
 import { sagaAddToWish } from '../Store/Wishlist/wishAction';
 
 
-export default  function ProductDetails () {
-    const dispatch = useDispatch()
-
-    const { id } = useParams()
-    const [productData, setProductData] = useState({})
-     
-   const productDetailApi = async () => {
-    try {
-        let response = await axios.get(`https://fakestoreapi.com/products/${id}`)
-       
-        setProductData(response.data)
-       
-    } catch (error) {
-        console.log(error);
-    }
-   }
-
-   useEffect(() => {
-       productDetailApi()
-   }, [id])
-
-   useEffect(()=>{
-   },[productData])
-   
-
+export default  function ItemDetailsCard (props) {
+  const { productData } = props
+  const dispatch = useDispatch()
+  
   return (
     <section className="bg-white overflow-hidden">
       <div className="mx-auto max-w-5xl px-5 py-24">
         <div className="mx-auto flex flex-wrap items-center lg:w-4/5">
           <img
-            alt="Nike Air Max 21A"
+            alt= {productData?.title}
             className="h-64 w-full rounded object-contain lg:h-96 lg:w-1/2"
             src= {productData?.image}
           />
