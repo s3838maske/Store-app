@@ -22,41 +22,7 @@ function Navbar(props) {
           </div>
 
           <div className="flex items-center justify-around">
-            <div className="hidden lg:block">
-              <ul className="inline-flex space-x-8">
-                <li>
-                  <NavLink
-                    to={"/"}
-                    style={({ isActive, isPending, isTransitioning }) => {
-                      return {
-                        fontWeight: isActive ? "bold" : "",
-                        color: isPending ? "red" : "black",
-                        viewTransitionName: isTransitioning ? "slide" : "",
-                      };
-                    }}
-                    className="text-sm font-semibold text-gray-800 hover:text-gray-900"
-                  >
-                    Home
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to={"/about"}
-                    style={({ isActive, isPending, isTransitioning }) => {
-                      return {
-                        fontWeight: isActive ? "bold" : "",
-                        color: isPending ? "red" : "black",
-                        viewTransitionName: isTransitioning ? "slide" : "",
-                      };
-                    }}
-                    className="text-sm font-semibold text-gray-800 hover:text-gray-900"
-                  >
-                    About
-                  </NavLink>
-                </li>
-              </ul>
-            </div>
-
+           
             <div className="hidden lg:block ">
               <div className="flex items-center">
                 <div className="flex grow justify-center">

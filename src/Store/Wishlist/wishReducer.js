@@ -4,7 +4,6 @@ const initialState = {
 }
 
 const wishListReducer = (state = initialState , action) => {
-console.log(state.wishListProduct);
     switch (action.type) {
         case "ADD_TO_WISH":
             {
