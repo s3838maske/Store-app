@@ -11,7 +11,7 @@ import { connect } from "react-redux";
             <li className="flex py-6 px-5 sm:py-6 ">
               <div className="flex-shrink-0">
                 <img
-                  src={product.payload.image}
+                  src={product.payload.images}
                   alt={product.payload.title}
                   className="sm:h-38 sm:w-38 h-24 w-24 rounded-md object-contain object-center"
                 />

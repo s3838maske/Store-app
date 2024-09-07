@@ -3,6 +3,7 @@ import React from "react";
 import {Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Login from "../Container/Login";
+import Loading from "../Components/common/Loading";
 
 export default class SignIn extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export default class SignIn extends React.Component {
       email: "",
       password: "",
       navigate: false,
+      loading: false,
     };
 
     this.debounceTimer = null;
@@ -30,9 +32,11 @@ export default class SignIn extends React.Component {
   };
 
   handleValidation() {
+    this.setState({ loading:true})
     const { email, password } = this.state;
 
   if (!email || !password) {
+    this.setState({ loading:false})
       toast.error("Enter Valid Email & Password", {
         position: "top-center",
         autoClose: 3000,
@@ -53,6 +57,7 @@ export default class SignIn extends React.Component {
   }
 
   userApi = () => {
+   
     axios
       .post("https://api.escuelajs.co/api/v1/auth/login", {
         email: this.state.email,
@@ -62,6 +67,7 @@ export default class SignIn extends React.Component {
         JSON.stringify(
           localStorage.setItem("currentUserToken", Response?.data.access_token)
         );
+        this.setState({ loading:false})
         this.props?.checkUserFunction();
         this.props?.userAuthApi();
         toast.success("Successfully Login !!", {
@@ -76,6 +82,7 @@ export default class SignIn extends React.Component {
         this.handleNavigate();
       })
       .catch((Error) => {
+        this.setState({ loading:false})
         console.log(Error);
         toast.error(Error.message, {
           position: "top-center",
@@ -96,6 +103,7 @@ export default class SignIn extends React.Component {
 
     return (
       <>
+      {this.state.loading && <Loading /> }
         <Login handleValidation={this.handleValidation} handleUser={this.handleUser} />
       </>
     );

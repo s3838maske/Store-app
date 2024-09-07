@@ -4,7 +4,7 @@ export default function LogoutModel({ close,logOut }) {
 
   return (
     <>
-      {/* <div className="bg- fix h-screen"></div> */}
+      <div className="m-auto bg-white bg-opacity-50 overflow-x-hidden fixed flex z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"></div>
       <div
         id="popup-modal"
         tabIndex="-1"

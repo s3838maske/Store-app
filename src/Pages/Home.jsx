@@ -31,9 +31,6 @@ function Home(props) {
 
   return (
     <>
-      {props.productListData.length === 0 ? (
-        <Loading />
-      ) : (
         <div className=" min-h-full py-20 px-4 max-w-screen-xl flex flex-wrap gap-x-6  justify-center gap-y-9 mx-auto">
           {props.productListData.map((post, i) => {
             return (
@@ -46,7 +43,6 @@ function Home(props) {
             );
           })}
         </div>
-      )}
     </>
   );
 }

@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Register from "../Container/Regis";
+import Loading from "../Components/common/Loading";
 
 export default class SignUp extends Component {
   constructor() {
@@ -13,6 +14,7 @@ export default class SignUp extends Component {
       password: "",
       avatar: "https://picsum.photos/800",
       navigate: false,
+      loading : false,
     };
 
     this.debounceTimer = null
@@ -30,6 +32,7 @@ export default class SignUp extends Component {
   
  
   handleValidation = () => {
+   
     const { email, password, name } = this.state;
 
     // Basic validation checks
@@ -81,6 +84,7 @@ export default class SignUp extends Component {
 
 
   createUserApi = () => {
+    this.setState({loading:true})
     axios
       .post("https://api.escuelajs.co/api/v1/users/", {
         name: this.state.name,
@@ -103,6 +107,7 @@ export default class SignUp extends Component {
         this.handleNavigate();
       })
       .catch((Error) => {
+        this.setState({loading:false})
         console.log(Error);
         toast.error(Error.message, {
           position: "top-center",
@@ -122,6 +127,7 @@ export default class SignUp extends Component {
     }
     return (
       <>
+      {this.state.loading&&<Loading />}
        <Register handleUser={this.handleUser} handleValidation={this.handleValidation} />
       </>
     );

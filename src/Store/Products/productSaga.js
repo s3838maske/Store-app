@@ -6,7 +6,7 @@ function* productList() {
     const data = yield call(productData)
     yield put ({
         type : "CALL_PRODUCT_LIST",
-        payload : data
+        payload : data.slice(0,20)
     })
 }
 

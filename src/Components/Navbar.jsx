@@ -1,22 +1,26 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useNavigate, NavLink, redirect } from "react-router-dom";
 import LogoutModel from "./common/LogoutModel";
+import Search from "./Search";
 
 
 function Navbar(props) {
-
+  const navigate = useNavigate()
   const [showModel, setShowModel] = useState(false);
 
   function logOut(){
     localStorage.removeItem("currentUserToken");
     props.checkUserFunction();
-     setShowModel(false)
+    setShowModel(false)
+   navigate("login")
   }
   
   const closeModel = () => {
     setShowModel(false)
   }
+
+  
 
   return (
     <>
@@ -36,13 +40,7 @@ function Navbar(props) {
            
             <div className="hidden lg:block ">
               <div className="flex items-center">
-                <div className="flex grow justify-center">
-                  <input
-                    className="flex h-10 w-[250px] mx-3 rounded-md bg-gray-100 px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                    type="text"
-                    placeholder="Serach"
-                  ></input>
-                </div>
+                <Search />
                 <NavLink to={"wishlist"}>
                   <button
                     type="button"

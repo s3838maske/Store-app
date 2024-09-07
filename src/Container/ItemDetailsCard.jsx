@@ -16,10 +16,10 @@ export default  function ItemDetailsCard (props) {
           <img
             alt= {productData?.title}
             className="h-64 w-full rounded object-contain lg:h-96 lg:w-1/2"
-            src= {productData?.image}
+            src= {productData?.images}
           />
           <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-10">
-            <h2 className="text-sm font-semibold tracking-widest text-gray-500"> {productData?.title}  </h2>
+            <h2 className="text-sm font-semibold tracking-widest text-gray-500"> {productData?.category?.name}  </h2>
             <h1 className="my-4 text-3xl font-semibold text-black">{productData?.title}</h1>
             <div className="my-4 flex items-center">
               <span className="flex items-center space-x-1">

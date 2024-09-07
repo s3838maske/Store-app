@@ -12,12 +12,13 @@ function ProductCard(props) {
   return (
     <div >
       <div className="w-72 rounded-md border bg-white shadow-2xl">
+      <div className="p-4" onClick={() => navigate(`ProductDetail/${data.id}`)}>
         <img
           src={data.images}
           alt={data.title}
-          className="object-contain aspect-[16/9] w-full rounded-md md:aspect-auto md:h-[300px] lg:h-[200px]"
+          className="object-cover aspect-[16/9] w-full rounded-md md:aspect-auto md:h-[300px] lg:h-[200px]"
         />
-        <div className="p-4" onClick={() => navigate(`ProductDetail/${data.id}`)}>
+       
           <h1 className="inline-flex items-center text-lg font-semibold">
             {data.title.slice(0, 20)}
           </h1>
