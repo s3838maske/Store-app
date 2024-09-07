@@ -10,3 +10,14 @@ function* addToCartSaga(payload) {
 export function* cartSagas() {
     yield takeLatest("SAGA_ADD_TO_CART", addToCartSaga);
 }
+
+function* deleteToCartSaga(payload){
+  yield put({
+    type: "DELETE_TO_CART",
+    payload: payload
+  })
+}
+
+export function* deleteItemSaga(){
+  yield takeLatest("SAGA_DELETE_TO_CART",deleteToCartSaga)
+}

@@ -177,18 +177,17 @@ class App extends React.Component {
             <Route
               path="cart"
               element={
-                <Cart
-                // cartProduct={this.state.cartProducts}
-                />
+                <ErrorBoundary>
+                  <Cart/>
+                </ErrorBoundary>
               }
             />
             <Route
               path="wishlist"
               element={
-                <Wishlist
-                // cartFunc={this.addToCart}
-                // wishlistProduct={this.state.wishlistItems}
-                />
+                <ErrorBoundary>
+                  <Wishlist />
+                </ErrorBoundary>
               }
             />
             <Route path="ProductDetail/:id" element={<ItemDetails />} />
@@ -196,11 +195,13 @@ class App extends React.Component {
               path="login"
               element={
                 <Private>
+                  <ErrorBoundary>
                   <SignIn
                     isLogin={this.state.isLogin}
                     checkUserFunction={this.handleAuthentication}
                     userAuthApi={this.userAuthApi}
                   />
+                  </ErrorBoundary>
                 </Private>
               }
             />
@@ -208,7 +209,9 @@ class App extends React.Component {
               path="signup"
               element={
                 <Private>
+                  <ErrorBoundary>
                   <SignUp />
+                  </ErrorBoundary>
                 </Private>
               }
             />

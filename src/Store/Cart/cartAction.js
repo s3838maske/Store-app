@@ -14,7 +14,24 @@ const sagaAddToCart = (payload) => {
     })
 }
 
+const deleteToCart = (payload) => {
+
+    return ( {
+        type : "DELETE_TO_CART",
+        payload : payload
+    })
+}
+
+const sagaDeleteToCart = (payload) => {
+    return ({
+        type : "SAGA_DELETE_TO_CART",
+        payload : payload
+    })
+}
+
 export {
     addToCart,
-    sagaAddToCart
+    sagaAddToCart,
+    sagaDeleteToCart,
+    deleteToCart
 }

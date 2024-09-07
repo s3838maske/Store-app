@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Register from "../Container/Regis";
 import Loading from "../Components/common/Loading";
+import { signUpApi } from "../Constants/constant";
 
 export default class SignUp extends Component {
   constructor() {
@@ -86,7 +87,7 @@ export default class SignUp extends Component {
   createUserApi = () => {
     this.setState({loading:true})
     axios
-      .post("https://api.escuelajs.co/api/v1/users/", {
+      .post( signUpApi, {
         name: this.state.name,
         email: this.state.email,
         password: this.state.password,

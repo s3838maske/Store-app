@@ -1,8 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
+import { sagaDeleteToCart } from "../Store/Cart/cartAction";
 
 
  function CartItem(props) {
+  const dispatch = useDispatch()
   return (
     <>
       <ul role="list" className="bg-white rounded-lg divide-y divide-gray-200">
@@ -66,6 +68,7 @@ import { connect } from "react-redux";
               <div className="ml-6 flex text-sm">
                 <button
                   type="button"
+                  onClick={()=>dispatch(sagaDeleteToCart(product))}
                   className="flex items-center space-x-1 px-2 py-1 pl-0"
                 >
                   <ion-icon name="trash-outline"></ion-icon>
@@ -87,5 +90,6 @@ const mapStateToProps = (state) => {
      cart : state.cartProduct.cart
   };
 };
+
 
 export default connect(mapStateToProps)(CartItem);

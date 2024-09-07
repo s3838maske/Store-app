@@ -4,6 +4,8 @@ import {Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Login from "../Container/Login";
 import Loading from "../Components/common/Loading";
+import {loginApi} from '../Constants/constant';
+
 
 export default class SignIn extends React.Component {
   constructor(props) {
@@ -59,7 +61,7 @@ export default class SignIn extends React.Component {
   userApi = () => {
    
     axios
-      .post("https://api.escuelajs.co/api/v1/auth/login", {
+      .post( loginApi, {
         email: this.state.email,
         password: this.state.password,
       })

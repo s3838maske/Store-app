@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { searchItemApi } from "../Constants/constant";
+
 
 function Search() {
   const [searchInput, setSearchInput] = useState("");
@@ -22,7 +24,7 @@ useEffect(() => {
     
     const searchApi = setTimeout(() => {
         axios
-        .get(`https://api.escuelajs.co/api/v1/products/?title=${searchInput}`)
+        .get(searchItemApi+searchInput)
         .then((response) => {
             // console.log(response.data);
             setSearchResult(response.data);
