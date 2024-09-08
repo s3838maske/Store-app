@@ -5,7 +5,7 @@ export default function Loading() {
     <>
       {/* <div className="bg-white bg-opacity-50 "></div> */}
 
-      <div className="m-auto w-52 h-40 bg-gray-800 bg-opacity-50 rounded-lg overflow-x-hidden fixed flex z-50 justify-center items-center md:inset-0 h-[calc(100%-1rem)]">
+      <div className="m-auto w-auto h-auto bg-gray-800 bg-opacity-50 rounded-lg overflow-x-hidden fixed flex z-50 justify-center items-center md:inset-0 h-[calc(100%-1rem)]">
     
         <div className="text-center">
           <div role="status">

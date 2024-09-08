@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import { useNavigate, NavLink, redirect } from "react-router-dom";
+import { connect, useSelector } from "react-redux";
+import { useNavigate, NavLink } from "react-router-dom";
 import LogoutModel from "./common/LogoutModel";
 import Search from "./Search";
 
@@ -8,6 +8,9 @@ import Search from "./Search";
 function Navbar(props) {
   const navigate = useNavigate()
   const [showModel, setShowModel] = useState(false);
+
+  const cart = useSelector((state)=> state.cartProduct.cart)
+  const wishList = useSelector((state)=> state.wishList.wishListProduct)
 
   function logOut(){
     localStorage.removeItem("currentUserToken");
@@ -47,7 +50,7 @@ function Navbar(props) {
                     className="rounded-md bg-black px-4 py-1 text-2xl font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                   >
                     <ion-icon name="heart"></ion-icon>
-                    <sup>  {props.wishList.length} </sup>
+                    <sup> {wishList.length} </sup>
                   </button>
                 </NavLink>
 
@@ -57,7 +60,7 @@ function Navbar(props) {
                     className="mx-2 rounded-md bg-black px-4 py-1 text-2xl font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                   >
                     <ion-icon name="cart-outline"></ion-icon>
-                    <sup> {props.cart.length} </sup>
+                    <sup> {cart.length} </sup>
                   </button>
                 </NavLink>
 
@@ -95,11 +98,13 @@ function Navbar(props) {
 
 
 
-const mapStateToProps = (state) => {
-  return {
-     cart : state.cartProduct.cart,
-     wishList : state.wishList.wishListProduct
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//      cart : state.cartProduct.cart,
+//      wishList : state.wishList.wishListProduct
+//   };
+// };
 
-export default connect(mapStateToProps)(Navbar);
+// export default connect(mapStateToProps, ()=>{})(Navbar);
+
+export default Navbar

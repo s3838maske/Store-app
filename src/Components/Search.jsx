@@ -11,9 +11,7 @@ function Search() {
     let value = e.target.value;
     setSearchInput(value);
 
-    const filteredResults = searchResult.filter((result) =>
-      result.title.includes(value)
-    );
+    const filteredResults = searchResult.filter((result) =>result.title.includes(value));
     setSearchResult(filteredResults);
 };
 

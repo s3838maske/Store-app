@@ -9,12 +9,12 @@ import { sagaDeleteToCart } from "../Store/Cart/cartAction";
     <>
       <ul role="list" className="bg-white rounded-lg divide-y divide-gray-200">
         {props.cart.map((product) => (
-          <div key={product.payload.id} >
+          <div key={product.id} >
             <li className="flex py-6 px-5 sm:py-6 ">
               <div className="flex-shrink-0">
                 <img
-                  src={product.payload.images}
-                  alt={product.payload.title}
+                  src={product.images}
+                  alt={product.title}
                   className="sm:h-38 sm:w-38 h-24 w-24 rounded-md object-contain object-center"
                 />
               </div>
@@ -25,23 +25,23 @@ import { sagaDeleteToCart } from "../Store/Cart/cartAction";
                     <div className="flex justify-between">
                       <h3 className="text-sm">
                         <a
-                          href={product.payload.image}
+                          href={product.image}
                           className="font-semibold text-black"
                         >
-                          {product.payload.title}
+                          {product.title}
                         </a>
                       </h3>
                     </div>
                     <div className="mt-1 flex items-end">
                       <p className="text-xs font-medium text-gray-500 line-through">
-                        {product.payload.originalPrice}
+                        {product.originalPrice}
                       </p>
                       <p className="text-lg font-medium text-gray-900 text-green-600">
-                        &nbsp;&nbsp;₹ {product.payload.price}
+                        &nbsp;&nbsp;₹ {product.price}
                       </p>
                       &nbsp;&nbsp;
                       <p className="text-sm font-medium text-green-500">
-                        {product.payload.discount}
+                        {product.discount}
                       </p>
                     </div>
                   </div>
@@ -68,7 +68,7 @@ import { sagaDeleteToCart } from "../Store/Cart/cartAction";
               <div className="ml-6 flex text-sm">
                 <button
                   type="button"
-                  onClick={()=>dispatch(sagaDeleteToCart(product))}
+                  onClick={()=>dispatch(sagaDeleteToCart(product.id))}
                   className="flex items-center space-x-1 px-2 py-1 pl-0"
                 >
                   <ion-icon name="trash-outline"></ion-icon>

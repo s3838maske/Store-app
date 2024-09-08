@@ -9,7 +9,6 @@ import { Provider } from "react-redux";
 import store from "./Store/index.js";
 import Loading from "./Components/common/Loading.jsx";
 
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <ToastContainer
@@ -24,13 +23,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       theme="colored"
       transition:Bounce
     />
-  <Provider store={store}>
-<Suspense fallback={<Loading />}>
+    <Provider store={store}>
+      <Suspense fallback={<Loading />}>
+        <App />
+      </Suspense>
+    </Provider>
 
-    <App />
-</Suspense>
-  </Provider>
-    
     <ToastContainer />
   </BrowserRouter>
 );

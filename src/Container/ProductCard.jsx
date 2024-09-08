@@ -4,10 +4,38 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { sagaAddToCart } from "../Store/Cart/cartAction";
 import { sagaAddToWish } from "../Store/Wishlist/wishAction";
+import { toast } from "react-toastify";
+
 
 function ProductCard(props) {
   const navigate = useNavigate();
   let { data, addToCartfunc, addToWishlistfunc, isLogin } = props;
+
+  const handleProduct = () => {
+    let itemExits = props.cart.some(item => item.id===data.id)
+    if (itemExits) {
+      toast.info("Product already exist", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      }); 
+    }else{
+      toast.success("Added To Cart Successfully !!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      props.addtocartAction(data)
+    }
+  }
 
   return (
     <div >
@@ -61,7 +89,7 @@ function ProductCard(props) {
               <button
                 type="button"
                 className="flex justify-center items-center gap-1 mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                onClick={() => props.addtocartAction(data)}
+                onClick={handleProduct}
               >
                 <ion-icon name="cart-outline"></ion-icon>
                 Add to Cart
