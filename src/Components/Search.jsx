@@ -1,40 +1,29 @@
-import axios from "axios";
+// import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { searchItemApi } from "../Constants/constant";
+// import { searchItemApi } from "../Constants/constant";
+// import { useDispatch } from "react-redux";
+// import { sagaSearchProductList } from "../Store/Products/productAction";
 
 
 function Search() {
-  const [searchInput, setSearchInput] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
 
-  const handleSearch = (e) => {
-    let value = e.target.value;
-    setSearchInput(value);
+  // const searchAction = useDispatch()
 
-    const filteredResults = searchResult.filter((result) =>result.title.includes(value));
-    setSearchResult(filteredResults);
-};
+  // const [searchInput, setSearchInput] = useState([]);
 
-useEffect(() => {
-    if (!searchInput) {
-        return;
-    }
+  // const handleSearch = (e) => {
+  //   let value = e.target.value;
+  //   setSearchInput(value);
+  // };
+  
+  // useEffect(() => {
+  // const getData = setTimeout(()=>{
+  //     searchAction(sagaSearchProductList(searchInput))
+  //   },500)
     
-    const searchApi = setTimeout(() => {
-        axios
-        .get(searchItemApi+searchInput)
-        .then((response) => {
-            // console.log(response.data);
-            setSearchResult(response.data);
-           
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-    }, 1000);
-
-    return () => clearTimeout(searchApi);
-  }, [searchInput]);
+  //   return () => clearTimeout(getData)
+  
+  //  }, [searchInput]);
 
   return (
     <>
@@ -42,16 +31,11 @@ useEffect(() => {
         <input
           className="flex h-10 w-[250px] mx-3 rounded-md bg-gray-100 px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
           type="text"
-          value={searchInput}
-          onChange={handleSearch}
+          // value={searchInput}
+          // onChange={handleSearch}
           placeholder="Search"
         ></input>
       </div>
-      <ul>
-        {searchResult.map((result) => (
-          <li key={result.id}>{result.title}</li>
-        ))}
-      </ul>
     </>
   );
 }

@@ -1,7 +1,7 @@
 // import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ProductCard from "../Container/ProductCard";
-import Loading from "../Components/common/Loading";
+// import Loading from "../Components/common/Loading";
 // import Error from "../Components/common/Error";
 
 import { connect } from "react-redux";
@@ -22,7 +22,7 @@ function Home(props) {
   //   }
   // };
 
-  // console.log(props.productListData);
+  console.log(props.productListData);
 
   useEffect(() => {
     props.productApiAction();
@@ -31,11 +31,9 @@ function Home(props) {
 
   return (
     <>
-      {props.productListData.length === 0 ? (
-        <Loading />
-      ) : (
+    
         <div className=" min-h-full py-20 px-4 max-w-screen-xl flex flex-wrap gap-x-6  justify-center gap-y-9 mx-auto">
-          {props.productListData.map((post, i) => {
+          {props.productListData?.map((post, i) => {
             return (
               <ProductCard
                 isLogin={props.isLogin}
@@ -46,13 +44,12 @@ function Home(props) {
             );
           })}
         </div>
-      )}
+       {/* )}  */}
     </>
   );
 }
-
+   
 const mapStateToProps = (state) => {
-  // console.log(state.products.ListOfItems);
   return {
     productListData: state.products.ListOfItems,
   };

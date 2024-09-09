@@ -13,6 +13,14 @@ const productReducer = (state = initialState, action) => {
       };
     }
 
+    // case "SEARCH_PRODUCT_LIST": {
+    //   console.log(action,"search");
+    //   return {
+    //     ...state,
+    //     ListOfItems: action.payload,
+    //   };
+    // }
+
     default:
       return state;
   }

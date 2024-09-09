@@ -9,7 +9,8 @@ function* rootSaga() {
         deleteItemSaga(),
         wishSagas(),
         sagaProductList(),
-        // removeWishSagas()
+        // removeWishSagas(),
+        // sagaSearchItem()
     ]);
 }
 
