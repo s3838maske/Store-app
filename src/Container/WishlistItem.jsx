@@ -3,11 +3,39 @@ import { connect } from "react-redux";
 
 import { sagaAddToCart } from "../Store/Cart/cartAction";
 import { bindActionCreators } from "redux";
+import { toast } from "react-toastify";
 // import { sagaRemoveToWish } from "../Store/Wishlist/wishAction";
 // import { BookImage } from "lucide-react";
 
 function WishlistItem(props) {
-  console.log(props.wishListData);
+
+  const handleProduct = (data) => {
+    let itemExits = props.cart.some(item => item.id===data.id)
+    if (itemExits) {
+      toast.info("Product already exist", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      }); 
+    }else{
+      toast.success("Added To Cart Successfully !!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      props.addToCartAction(data)
+    }
+  }
+
+
   return (
     <>
         <ul className="bg-white px-2 flex flex-col divide-y divide-gray-200">
@@ -43,7 +71,7 @@ function WishlistItem(props) {
                   <button
                     type="button"
                     className="flex items-center space-x-2 px-2 py-1"
-                    onClick={()=> props.addToCartAction(Items)}
+                    onClick={()=>handleProduct(Items)}
                   >
                     <span>Add to Cart</span>
                   </button>
@@ -60,7 +88,8 @@ function WishlistItem(props) {
 
 const mapStateToProps = (state) => {
   return {
-    wishListData: state.wishList.wishListProduct
+    wishListData: state.wishList.wishListProduct,
+    cart: state.cartProduct.cart,
   };
 };
 

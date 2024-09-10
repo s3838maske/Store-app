@@ -12,24 +12,24 @@ const sagaProductList = (payload) => {
     })
 }
 
-// const searchProduct = (payload) => {
-//     return ({
-//         type : "SEARCH_PRODUCT_LIST",
-//         payload: payload
-//     })
-// }
+const searchProduct = (payload) => {
+    return ({
+        type : "SEARCH_PRODUCT_LIST",
+        payload: payload
+    })
+}
 
-// const sagaSearchProductList = (payload) => {
-//     return ({
-//         type : "SAGA_SEARCH_PRODUCT_LIST",
-//         payload: payload
-//     })
-// }
+const sagaSearchProductList = (payload) => {
+    return ({
+        type : "SAGA_SEARCH_PRODUCT_LIST",
+        payload: payload
+    })
+}
 
 
 export {
     productList,
-    // searchProduct,
-    // sagaSearchProductList,
+    searchProduct,
+    sagaSearchProductList,
     sagaProductList
 }

@@ -40,7 +40,7 @@ function ProductCard(props) {
   return (
     <div >
       <div className="w-72 rounded-md border bg-white shadow-2xl">
-      <div className="p-4" onClick={() => navigate(`ProductDetail/${data.id}`)}>
+      <div className="p-4 cursor-pointer" onClick={() => navigate(`ProductDetail/${data.id}`)}>
         <img
           src={data.images}
           alt={data.title}

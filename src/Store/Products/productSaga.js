@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import {productData } from "./productApi";
+import {productData , handleSearchApi} from "./productApi";
 
 
 
@@ -15,14 +15,14 @@ export function* sagaProductList(){
     yield takeLatest ("SAGA_CALL_PRODUCT_LIST",productList)
 }
 
-// function* searchApi(action) {
-//     const response = yield call(handleSearchApi, action)
-//     yield put ({
-//         type : "SEARCH_PRODUCT_LIST",
-//         payload : response
-//     })
-// }
+function* searchApi(action) {
+    const response = yield call(handleSearchApi, action.payload)
+    yield put ({
+        type : "SEARCH_PRODUCT_LIST",
+        payload : response
+    })
+}
 
-// export function* sagaSearchItem(){
-//     yield takeLatest ("SAGA_SEARCH_PRODUCT_LIST",searchApi)
-// }
+export function* sagaSearchItem(){
+    yield takeLatest ("SAGA_SEARCH_PRODUCT_LIST",searchApi)
+}

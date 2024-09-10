@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect, useSelector } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
 import LogoutModel from "./common/LogoutModel";
-import Search from "./Search";
+import Search from "../Container/Search";
 
 
 function Navbar(props) {
