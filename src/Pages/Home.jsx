@@ -15,8 +15,8 @@ function Home(props) {
   return (
     <>
     
-        <div className=" min-h-full py-20 px-4 max-w-screen-xl flex flex-wrap gap-x-6  justify-center gap-y-9 mx-auto">
-          {/* {!props.productListData &&  } */}
+        {/* <div className=" min-h-full py-20 px-4 max-w-screen-xl flex flex-wrap gap-x-6  justify-center gap-y-9 mx-auto"> */}
+        <div className="mx-auto grid w-full max-w-7xl items-center space-y-4 px-2 py-10 md:grid-cols-2 md:gap-6 md:space-y-0 lg:grid-cols-4">
           {props.productListData?.map((post, i) => {
             return (
               <ProductCard

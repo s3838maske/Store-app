@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Star, ChevronDown, UserPen } from 'lucide-react'
+import React from 'react'
+import { Star} from 'lucide-react'
 
 import { useDispatch } from 'react-redux';
 import { sagaAddToWish } from '../Store/Wishlist/wishAction';

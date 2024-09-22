@@ -9,8 +9,6 @@ import axios from "axios";
 import NotFound from "./Pages/NotFound.jsx";
 import Private from "./Routes/PrivateRoute.jsx";
 import ErrorBoundary from "./Components/common/ErrorBoundary.jsx";
-// import Home from "./Pages/Home.jsx";
-// import ItemDetails from "./Pages/ItemDetails.jsx";
 const Home = lazy(() => import("./Pages/Home.jsx"));
 const ItemDetails = lazy(() => import("./Pages/ItemDetails.jsx"));
 
@@ -18,17 +16,10 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      // count: 0,
-      // cartProducts: [],
-      // wishlistItems: [],
       isLogin: false,
       currentUser: "",
     };
-    // this.cart = [];
-    // this.wishList = [];
 
-    // this.addToWishlist = this.addToWishlist.bind(this);
-    // this.addToCart = this.addToCart.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.userAuthApi = this.userAuthApi.bind(this);
   }
@@ -44,89 +35,7 @@ class App extends React.Component {
   componentDidMount() {
     this.handleAuthentication();
     this.userAuthApi();
-    // this.props.productApiAction();
   }
-
-  // addToCart(id, name, imgSrc, price, desc) {
-  //   let isItemInCart = false;
-
-  //   this.cart.forEach((items) => {
-  //     if (items.id === id) {
-  //       isItemInCart = true;
-  //     }
-  //   });
-
-  //   if (!isItemInCart) {
-  //     this.cart.push({
-  //       id: id,
-  //       title: name,
-  //       price: price,
-  //       imageSrc: imgSrc,
-  //       desc: desc,
-  //     });
-
-  //     this.setState({ cartProducts: this.cart });
-  //     toast.success("Added To Cart Successfully !!", {
-  //       position: "top-center",
-  //       autoClose: 3000,
-  //       hideProgressBar: false,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "colored",
-  //     });
-  //   } else {
-  //     toast.info("Product already exist", {
-  //       position: "top-center",
-  //       autoClose: 3000,
-  //       hideProgressBar: false,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "colored",
-  //     });
-  //   }
-  // }
-
-  // addToWishlist(id, name, imgSrc, price, desc) {
-  //   let isItemInWish = false;
-
-  //   this.wishList.forEach((value) => {
-  //     if (value.id === id) {
-  //       isItemInWish = true;
-  //     }
-  //   });
-
-  //   if (!isItemInWish) {
-  //     this.wishList.push({
-  //       id: id,
-  //       title: name,
-  //       price: price,
-  //       imageSrc: imgSrc,
-  //       desc: desc,
-  //     });
-  //     this.setState({ wishlistItems: this.wishList });
-  //     toast.success("Added To Wishlist Successfully !!", {
-  //       position: "top-center",
-  //       autoClose: 3000,
-  //       hideProgressBar: false,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "colored",
-  //     });
-  //   } else {
-  //     toast.info("Product already exist", {
-  //       position: "top-center",
-  //       autoClose: 3000,
-  //       hideProgressBar: false,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "colored",
-  //     });
-  //   }
-  // }
 
   async userAuthApi() {
     try {
@@ -155,8 +64,6 @@ class App extends React.Component {
               <Layout
                 currentUser={this.state.currentUser}
                 isLogin={this.state.isLogin}
-                // cart={this.cart}
-                // wishList={this.wishList}
                 checkUserFunction={this.handleAuthentication}
               />
             }
@@ -165,20 +72,15 @@ class App extends React.Component {
               index
               element={
                 <ErrorBoundary>
-
-                <Home
-                  isLogin={this.state.isLogin}
-                  // cartFunc={this.addToCart}
-                  // wishFunc={this.addToWishlist}
-                  />
-                  </ErrorBoundary>
+                  <Home isLogin={this.state.isLogin} />
+                </ErrorBoundary>
               }
             />
             <Route
               path="cart"
               element={
                 <ErrorBoundary>
-                  <Cart/>
+                  <Cart />
                 </ErrorBoundary>
               }
             />
@@ -196,11 +98,11 @@ class App extends React.Component {
               element={
                 <Private>
                   <ErrorBoundary>
-                  <SignIn
-                    isLogin={this.state.isLogin}
-                    checkUserFunction={this.handleAuthentication}
-                    userAuthApi={this.userAuthApi}
-                  />
+                    <SignIn
+                      isLogin={this.state.isLogin}
+                      checkUserFunction={this.handleAuthentication}
+                      userAuthApi={this.userAuthApi}
+                    />
                   </ErrorBoundary>
                 </Private>
               }
@@ -210,7 +112,7 @@ class App extends React.Component {
               element={
                 <Private>
                   <ErrorBoundary>
-                  <SignUp />
+                    <SignUp />
                   </ErrorBoundary>
                 </Private>
               }

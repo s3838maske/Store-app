@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { sagaAddToCart } from "../Store/Cart/cartAction";
 import { bindActionCreators } from "redux";
 import { toast } from "react-toastify";
+import { sagaRemoveToWish } from "../Store/Wishlist/wishAction";
 // import { sagaRemoveToWish } from "../Store/Wishlist/wishAction";
 // import { BookImage } from "lucide-react";
 
@@ -63,7 +64,7 @@ function WishlistItem(props) {
                 <div className="flex divide-x text-sm">
                   <button
                     type="button"
-                    // onClick={props.removeToWish(Items.id)}
+                    onClick={()=>props.removeToWishAction(Items.id)}
                     className="flex items-center space-x-2 px-2 py-1 pl-0"
                   >
                     <span>Remove</span>
@@ -96,7 +97,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     addToCartAction : sagaAddToCart,
-    // removeToWish : sagaRemoveToWish
+    removeToWishAction : sagaRemoveToWish
   },dispatch)
 }
 

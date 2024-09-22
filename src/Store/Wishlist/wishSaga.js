@@ -13,15 +13,15 @@ export function* wishSagas(){
 }
 
 
-// function* removeToWishSaga(payload){
+function* removeToWishSaga(payload){
 
-//     yield put({ type: "REMOVE_TO_WISH",
-//         payload : payload.payload
-// });
+    yield put({ type: "REMOVE_TO_WISH",
+        payload : payload.payload
+});
 
-// }
+}
 
-// export function* removeWishSagas(){
-//     yield takeLatest ("SAGA_REMOVE_TO_WISH", removeToWishSaga)
-// }
+export function* removeWishSagas(){
+    yield takeLatest ("SAGA_REMOVE_TO_WISH", removeToWishSaga)
+}
 

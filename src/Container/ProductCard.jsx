@@ -6,13 +6,12 @@ import { sagaAddToCart } from "../Store/Cart/cartAction";
 import { sagaAddToWish } from "../Store/Wishlist/wishAction";
 import { toast } from "react-toastify";
 
-
 function ProductCard(props) {
   const navigate = useNavigate();
   let { data, addToCartfunc, addToWishlistfunc, isLogin } = props;
 
-  const handleProduct = () => {
-    let itemExits = props.cart.some(item => item.id===data.id)
+  const handleAddToCart = () => {
+    let itemExits = props.cart.some((item) => item.id === data.id);
     if (itemExits) {
       toast.info("Product already exist", {
         position: "top-center",
@@ -22,8 +21,8 @@ function ProductCard(props) {
         draggable: true,
         progress: undefined,
         theme: "colored",
-      }); 
-    }else{
+      });
+    } else {
       toast.success("Added To Cart Successfully !!", {
         position: "top-center",
         autoClose: 3000,
@@ -33,20 +32,49 @@ function ProductCard(props) {
         progress: undefined,
         theme: "colored",
       });
-      props.addtocartAction(data)
+      props.addtocartAction(data);
     }
-  }
+  };
 
+  const handleAddToWishlist = () => {
+    let itemExits = props.wishList.some((item) => item.id === data.id);
+    if (itemExits) {
+      toast.info("Product already exist", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    } else {
+      toast.success("Added To Cart Successfully !!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      props.addToWishlist(data);
+    }
+  };
+  
   return (
-    <div >
+    <div>
       <div className="w-72 rounded-md border bg-white shadow-2xl">
-      <div className="p-4 cursor-pointer" onClick={() => navigate(`ProductDetail/${data.id}`)}>
-        <img
-          src={data.images}
-          alt={data.title}
-          className="object-cover aspect-[16/9] w-full rounded-md md:aspect-auto md:h-[300px] lg:h-[200px]"
-        />
-       
+        <div
+          className="p-4 cursor-pointer"
+          onClick={() => navigate(`ProductDetail/${data.id}`)}
+        >
+          <img
+            src={data.images[1]}
+            alt={data.title}
+            className="object-cover aspect-[16/9] w-full rounded-md md:aspect-auto md:h-[300px] lg:h-[200px]"
+          />
+
           <h1 className="inline-flex items-center text-lg font-semibold">
             {data.title.slice(0, 20)}
           </h1>
@@ -55,59 +83,66 @@ function ProductCard(props) {
           </p>
 
           <div className="mt-5 flex items-center space-x-2">
-            <span className="block text-base font-semibold">Price : </span>
-            <span className="block cursor-pointer rounded-md border border-gray-300 p-1 px-2 text-base font-medium">
-              {data.price}/-
-            </span>
+            <span className="block text-base font-bold">Price : ₹ {data.price}/-</span>
           </div>
         </div>
         <div className="p-2">
-        {!isLogin ? (
+          {!isLogin ? (
             <>
+            <div className="flex items-center justify-between">
+
               <Link to={"/login"}>
                 <button
                   type="button"
-                  className="flex justify-center items-center gap-1 mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+
                 >
                   <ion-icon name="cart-outline"></ion-icon>
-                  Add to Cart
+                  Add To Cart
                 </button>
               </Link>
 
               <Link to={"/login"}>
                 <button
                   type="button"
-                  className="flex justify-center items-center gap-1 mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+
                 >
                   <ion-icon name="heart-outline"></ion-icon>
-                  Add to Wishlist
+                  Add To Wishlist
                 </button>
               </Link>
+
+              </div>
             </>
           ) : (
             <>
+               <div className="flex items-center justify-between">
+
               <button
                 type="button"
-                className="flex justify-center items-center gap-1 mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                onClick={handleProduct}
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                onClick={handleAddToCart}
               >
                 <ion-icon name="cart-outline"></ion-icon>
-                Add to Cart
+                Add To Cart
               </button>
               <button
                 type="button"
-                className="flex justify-center items-center gap-1 mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                onClick={() => props.addToWishlist(data)}
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                onClick={handleAddToWishlist}
                 id="addToCartBtn"
               >
-                <ion-icon name="heart-outline"></ion-icon>
-                Add to Wishlist
+                <ion-icon name="heart-outline" ></ion-icon>
+                Add To Wishlist
               </button>
+              </div>
             </>
           )}
         </div>
       </div>
     </div>
+
   );
 }
 
