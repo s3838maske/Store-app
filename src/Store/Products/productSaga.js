@@ -7,7 +7,7 @@ function* productList() {
     const data = yield call(productData)
     yield put ({
         type : "CALL_PRODUCT_LIST",
-        payload : data.slice(0,20)
+        payload : data
     })
 }
 
@@ -19,7 +19,7 @@ function* searchApi(action) {
     const response = yield call(handleSearchApi, action.payload)
     yield put ({
         type : "SEARCH_PRODUCT_LIST",
-        payload : response
+        payload : response.slice(3,20)
     })
 }
 

@@ -46,7 +46,7 @@ function WishlistItem(props) {
             <div className="flex w-full space-x-2 sm:space-x-4">
               <img
                 className="h-20 w-20 flex-shrink-0 rounded object-contain outline-none dark:border-transparent sm:h-32 sm:w-32"
-                src={Items.images}
+                src={Items.image}
                 alt={Items.title}
               />
               <div className="flex w-full flex-col justify-between pb-4">
@@ -65,7 +65,7 @@ function WishlistItem(props) {
                   <button
                     type="button"
                     onClick={()=>props.removeToWishAction(Items.id)}
-                    className="flex items-center space-x-2 px-2 py-1 pl-0"
+                    className="flex items-center rounded-lg space-x-2 px-2 py-1 pl-0 hover:bg-red-700 hover:text-white"
                   >
                     <span>Remove</span>
                   </button>

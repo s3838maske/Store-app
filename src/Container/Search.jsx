@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from "react";
 // import { searchItemApi } from "../Constants/constant";
 import { useDispatch } from "react-redux";
-import { sagaSearchProductList } from "../Store/Products/productAction";
-
+import { sagaProductList, sagaSearchProductList } from "../Store/Products/productAction";
 
 function Search() {
   const searchAction = useDispatch();
 
-  const [searchInput, setSearchInput] = useState([]);
-  
+  const [searchInput, setSearchInput] = useState("");
+
   const handleSearch = (e) => {
     let value = e.target.value;
     setSearchInput(value);
   };
 
   useEffect(() => {
-    const getData = setTimeout(() => {
-      searchAction(sagaSearchProductList(searchInput));
-      
-    }, 400);
+      if (!searchInput) {
+        searchAction(sagaProductList())
+        return
+      }
+      const getData = setTimeout(() => {
+        searchAction(sagaSearchProductList(searchInput));
+      }, 400);
 
-    return () => clearTimeout(getData);
-  }, [searchInput]);
+      return () => clearTimeout(getData);
+    },
+    [searchInput]  
+  );
 
   return (
     <>

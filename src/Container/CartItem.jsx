@@ -13,7 +13,7 @@ import { sagaDeleteToCart } from "../Store/Cart/cartAction";
             <li className="flex py-6 px-5 sm:py-6 ">
               <div className="flex-shrink-0">
                 <img
-                  src={product.images}
+                  src={product.image}
                   alt={product.title}
                   className="sm:h-38 sm:w-38 h-24 w-24 rounded-md object-contain object-center"
                 />

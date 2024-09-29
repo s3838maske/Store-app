@@ -70,9 +70,9 @@ function ProductCard(props) {
           onClick={() => navigate(`ProductDetail/${data.id}`)}
         >
           <img
-            src={data.images[1]}
+            src={data.image}
             alt={data.title}
-            className="object-cover aspect-[16/9] w-full rounded-md md:aspect-auto md:h-[300px] lg:h-[200px]"
+            className="object-contain aspect-[16/9] w-full rounded-md md:aspect-auto md:h-[300px] lg:h-[200px]"
           />
 
           <h1 className="inline-flex items-center text-lg font-semibold">
