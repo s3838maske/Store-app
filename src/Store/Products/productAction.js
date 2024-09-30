@@ -26,4 +26,18 @@ const sagaSearchProductList = (payload) => {
   };
 };
 
-export { productList, searchProduct, sagaSearchProductList, sagaProductList };
+const categoryAction = (payload) => {
+  return {
+    type: "CATEGORY_PRODUCT",
+    payload: payload,
+  };
+};
+
+const sagaCategoryAction = (payload) => {
+  return {
+    type: "SAGA_CATEGORY_PRODUCT",
+    payload: payload,
+  };
+};
+
+export { productList, searchProduct, sagaSearchProductList, sagaProductList ,categoryAction,sagaCategoryAction};

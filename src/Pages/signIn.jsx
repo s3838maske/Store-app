@@ -53,7 +53,7 @@ export default class SignIn extends React.Component {
 
       this.debounceTimer = setTimeout(() => {
         this.userApi();
-      }, 2000);
+      }, 1000);
     }
     return;
   }

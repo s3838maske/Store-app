@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -9,7 +9,8 @@ import { toast } from "react-toastify";
 function ProductCard(props) {
   const navigate = useNavigate();
   let { data, addToCartfunc, addToWishlistfunc, isLogin } = props;
-
+  const [ disable , setDisable] = useState(false)
+ 
   const handleAddToCart = () => {
     let itemExits = props.cart.some((item) => item.id === data.id);
     if (itemExits) {
@@ -23,6 +24,7 @@ function ProductCard(props) {
         theme: "colored",
       });
     } else {
+      setDisable(true)
       toast.success("Added To Cart Successfully !!", {
         position: "top-center",
         autoClose: 3000,
@@ -70,7 +72,7 @@ function ProductCard(props) {
           onClick={() => navigate(`ProductDetail/${data.id}`)}
         >
           <img
-            src={data.image}
+            src={data.image || data.images}
             alt={data.title}
             className="object-contain aspect-[16/9] w-full rounded-md md:aspect-auto md:h-[300px] lg:h-[200px]"
           />
@@ -106,7 +108,6 @@ function ProductCard(props) {
                 <button
                   type="button"
                 className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-
                 >
                   <ion-icon name="heart-outline"></ion-icon>
                   Add To Wishlist
@@ -121,11 +122,12 @@ function ProductCard(props) {
 
               <button
                 type="button"
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className=" disabled:opacity-75 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={handleAddToCart}
+                disabled={disable && true}
               >
                 <ion-icon name="cart-outline"></ion-icon>
-                Add To Cart
+              { !disable ? "Add To Cart": "Added" }
               </button>
               <button
                 type="button"

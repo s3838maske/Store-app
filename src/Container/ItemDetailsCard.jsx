@@ -16,14 +16,14 @@ export default  function ItemDetailsCard (props) {
           <img
             alt= {productData?.title}
             className="h-64 w-full rounded object-contain lg:h-96 lg:w-1/2"
-            src= {productData?.images}
+            src= {productData?.images || productData?.image}
           />
           <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:pl-10">
             <h2 className="text-sm font-semibold tracking-widest text-gray-500"> {productData?.category?.name}  </h2>
             <h1 className="my-4 text-3xl font-semibold text-black">{productData?.title}</h1>
             <div className="my-4 flex items-center">
               <span className="flex items-center space-x-1">
-                {[...Array(Math.floor(5))].map((_, i) => (
+                {[...Array(Math.floor(4.2))].map((_, i) => (
                   <Star key={i} size={16} fill='rgb(237 189 15)' className="text-yellow-500" />
                 ))}
                 <span className="ml-3 inline-block text-xs font-semibold"> {productData?.rating?.count} </span>

@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import SignIn from "./Pages/SignIn.jsx";
 import SignUp from "./Pages/SignUp";
@@ -9,6 +9,7 @@ import axios from "axios";
 import NotFound from "./Pages/NotFound.jsx";
 import Private from "./Routes/PrivateRoute.jsx";
 import ErrorBoundary from "./Components/common/ErrorBoundary.jsx";
+import Loading from "./Components/common/Loading.jsx";
 const Home = lazy(() => import("./Pages/Home.jsx"));
 const ItemDetails = lazy(() => import("./Pages/ItemDetails.jsx"));
 
@@ -71,9 +72,11 @@ class App extends React.Component {
             <Route
               index
               element={
+                <Suspense fallback={<Loading/>}>
                 <ErrorBoundary>
                   <Home isLogin={this.state.isLogin} />
                 </ErrorBoundary>
+                </Suspense>
               }
             />
             <Route

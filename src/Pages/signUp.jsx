@@ -80,7 +80,7 @@ export default class SignUp extends Component {
 
     this.debounceTimer = setTimeout(() => {
       this.createUserApi();
-    }, 2000);
+    }, 1000);
   };
 
 

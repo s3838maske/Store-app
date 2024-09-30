@@ -7,15 +7,19 @@ import Loading from "../Components/common/Loading";
 export default function ItemDetails() {
   const { id } = useParams();
   const [itemData, setItemData] = useState({});
+  const[loading, setLoading] = useState(false)
 
   const productDetailApi = async () => {
+    setLoading(true)
     try {
       let response = await axios.get(
         `https://api.escuelajs.co/api/v1/products/${id}`
       );
 
       setItemData(response.data);
+      setLoading(false)
     } catch (error) {
+      setLoading(false)
       console.log(error);
     }
   };
@@ -28,8 +32,10 @@ export default function ItemDetails() {
 
   return (
     <>
-      
+      {
+        loading?<Loading />:
         <ItemDetailsCard productData={itemData} />
+      }
       
     </>
   );

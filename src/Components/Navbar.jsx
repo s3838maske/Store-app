@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { connect, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
 import LogoutModel from "./common/LogoutModel";
+import {
+  sagaCategoryAction,
+  sagaProductList,
+} from "../Store/Products/productAction";
+
 import Search from "../Container/Search";
 import {
   Disclosure,
@@ -14,19 +19,17 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
-// const navigation = [
-//   { name: 'Cart', href: '', current: true },
-//   { name: 'Team', href: '#', current: false },
-//   { name: 'Projects', href: '#', current: false },
-//   { name: 'Calendar', href: '#', current: false },
-// ]
-
-// function classNames(...classes) {
-//   return classes.filter(Boolean).join(' ')
-// }
+const categories = [
+  { id: 1, name: "Cloths" },
+  { id: 2, name: "Electronics" },
+  { id: 3, name: "Furniture" },
+  { id: 4, name: "Shoes" },
+  { id: 5, name: "Miscellaneous" },
+];
 
 function Navbar(props) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [showModel, setShowModel] = useState(false);
 
   const cart = useSelector((state) => state.cartProduct.cart);
@@ -46,8 +49,8 @@ function Navbar(props) {
   return (
     <>
       {showModel && <LogoutModel close={closeModel} logOut={logOut} />}
-      <Disclosure as="nav" className="bg-gray-800">
-        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <Disclosure as="nav" className=" fixed z-50 top-0 w-full bg-gray-800">
+        <div className=" mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
               {/* Mobile menu button*/}
@@ -166,39 +169,59 @@ function Navbar(props) {
 
         <DisclosurePanel className="sm:hidden">
           <div className="space-y-1 px-2 pb-3 pt-2">
-            <NavLink to={"wishlist"}>
+            
+            <ul className="pl-6">
+              
+              <NavLink to={"cart"}>
               <button
                 type="button"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white
-                block rounded-md px-3 py-2 text-base font-medium flex items-center gap-2"
-              >
-                Wishlist
-                <ion-icon name="heart"></ion-icon>
-                <sup> {wishList.length} </sup>
-              </button>
-            </NavLink>
-            <NavLink to={"cart"}>
-              <button
-                type="button"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white
-                block rounded-md px-3 py-2 text-base font-medium flex items-center gap-2"
+                className="text-gray-300 hover:bg-gray-700 hover:text-whiteblock rounded-md px-3 py-2 text-base font-medium flex items-center gap-2"
               >
                 Cart
                 <ion-icon name="cart-outline"></ion-icon>
                 <sup> {cart.length} </sup>
               </button>
             </NavLink>
+            <NavLink to={"wishlist"}>
+              <button
+                type="button"
+                className="text-gray-300 hover:bg-gray-700 hover:text-whiteblock rounded-md px-3 py-2 text-base font-medium flex items-center gap-2"
+              >
+                Wishlist
+                <ion-icon name="heart"></ion-icon>
+                <sup> {wishList.length} </sup>
+              </button>
+            </NavLink>
+           
             {!props.auth && (
               <NavLink to={"/login"}>
                 <button
                   type="button"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white
-                        block rounded-md px-3 py-2 text-base font-medium flex items-center gap-2"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-whiteblock rounded-md px-3 py-2 text-base font-medium flex items-center gap-2"
                 >
                   Log In
                 </button>
               </NavLink>
             )}
+            <li
+                key="AllProduct"
+                className="py-4 cursor-pointer"
+                onClick={() => dispatch(sagaProductList())}
+              >
+                <a className="text-gray-300 hover:bg-gray-700 hover:text-whiteblock rounded-md px-3 py-2 text-base font-medium flex items-center gap-2">All</a>
+              </li>
+              {categories.map((category) => (
+                <li
+                  key={category.id}
+                  className="py-4 cursor-pointer"
+                  onClick={() => dispatch(sagaCategoryAction(category.id))}
+                >
+                  <a className="text-gray-300 hover:bg-gray-700 hover:text-whiteblock rounded-md px-3 py-2 text-base font-medium flex items-center gap-2">
+                    {category.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </DisclosurePanel>
       </Disclosure>

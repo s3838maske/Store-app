@@ -20,6 +20,13 @@ const productReducer = (state = initialState, action) => {
       };
     }
 
+    case "CATEGORY_PRODUCT": {
+      return {
+        ...state,
+        ListOfItems: action.payload,
+      };
+    }
+
     default:
       return state;
   }

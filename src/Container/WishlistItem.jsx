@@ -9,9 +9,8 @@ import { sagaRemoveToWish } from "../Store/Wishlist/wishAction";
 // import { BookImage } from "lucide-react";
 
 function WishlistItem(props) {
-
   const handleProduct = (data) => {
-    let itemExits = props.cart.some(item => item.id===data.id)
+    let itemExits = props.cart.some((item) => item.id === data.id);
     if (itemExits) {
       toast.info("Product already exist", {
         position: "top-center",
@@ -21,8 +20,8 @@ function WishlistItem(props) {
         draggable: true,
         progress: undefined,
         theme: "colored",
-      }); 
-    }else{
+      });
+    } else {
       toast.success("Added To Cart Successfully !!", {
         position: "top-center",
         autoClose: 3000,
@@ -32,21 +31,22 @@ function WishlistItem(props) {
         progress: undefined,
         theme: "colored",
       });
-      props.addToCartAction(data)
+      props.addToCartAction(data);
     }
-  }
-
+  };
 
   return (
     <>
-        <ul className="bg-white px-2 flex flex-col divide-y divide-gray-200">
-      {props.wishListData.map(Items => (
-        
-          <li className="flex flex-col py-6 sm:flex-row sm:justify-between" key={Items.id} >
+      <ul className="bg-white px-2 flex flex-col divide-y divide-gray-200">
+        {props.wishListData.map((Items) => (
+          <li
+            className="flex flex-col py-6 sm:flex-row sm:justify-between"
+            key={Items.id}
+          >
             <div className="flex w-full space-x-2 sm:space-x-4">
               <img
                 className="h-20 w-20 flex-shrink-0 rounded object-contain outline-none dark:border-transparent sm:h-32 sm:w-32"
-                src={Items.image}
+                src={Items.images}
                 alt={Items.title}
               />
               <div className="flex w-full flex-col justify-between pb-4">
@@ -55,7 +55,7 @@ function WishlistItem(props) {
                     <h3 className="text-lg font-semibold leading-snug sm:pr-8">
                       {Items.title}
                     </h3>
-                    <p className="text-sm">{Items.discription}</p>
+                    <p className="text-sm">{Items.description.slice(0,100)}</p>
                   </div>
                   <div className="text-right">
                     <p className="text-lg font-semibold">₹{Items.price} </p>
@@ -64,7 +64,7 @@ function WishlistItem(props) {
                 <div className="flex divide-x text-sm">
                   <button
                     type="button"
-                    onClick={()=>props.removeToWishAction(Items.id)}
+                    onClick={() => props.removeToWishAction(Items.id)}
                     className="flex items-center rounded-lg space-x-2 px-2 py-1 pl-0 hover:bg-red-700 hover:text-white"
                   >
                     <span>Remove</span>
@@ -72,7 +72,7 @@ function WishlistItem(props) {
                   <button
                     type="button"
                     className="flex items-center space-x-2 px-2 py-1"
-                    onClick={()=>handleProduct(Items)}
+                    onClick={() => handleProduct(Items)}
                   >
                     <span>Add to Cart</span>
                   </button>
@@ -80,12 +80,11 @@ function WishlistItem(props) {
               </div>
             </div>
           </li>
-      ))}
+        ))}
       </ul>
     </>
   );
 }
-
 
 const mapStateToProps = (state) => {
   return {
@@ -95,10 +94,13 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    addToCartAction : sagaAddToCart,
-    removeToWishAction : sagaRemoveToWish
-  },dispatch)
-}
+  return bindActionCreators(
+    {
+      addToCartAction: sagaAddToCart,
+      removeToWishAction: sagaRemoveToWish,
+    },
+    dispatch
+  );
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(WishlistItem);
+export default connect(mapStateToProps, mapDispatchToProps)(WishlistItem);
