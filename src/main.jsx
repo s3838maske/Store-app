@@ -8,6 +8,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
 import store from "./Store/index.js";
 import Loading from "./Components/common/Loading.jsx";
+import { PersistGate } from "redux-persist/integration/react";
+import persistStore from "redux-persist/es/persistStore";
+
+
+let persist = persistStore(store) 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -24,9 +29,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       transition:Bounce
     />
     <Provider store={store}>
+      {/* <PersistGate persistor={persist}> */}
       <Suspense fallback={<Loading />}>
         <App />
       </Suspense>
+      {/* </PersistGate> */}
     </Provider>
 
     <ToastContainer />

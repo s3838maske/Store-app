@@ -65,7 +65,6 @@ function WishlistItem(props) {
                   <button
                     type="button"
                     onClick={() => props.removeToWishAction(Items.id)}
-                    className="flex items-center rounded-lg space-x-2 px-2 py-1 pl-0 hover:bg-red-700 hover:text-white"
                   >
                     <span>Remove</span>
                   </button>

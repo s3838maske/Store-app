@@ -4,7 +4,7 @@ import {Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Login from "../Container/Login";
 import Loading from "../Components/common/Loading";
-import {loginApi} from '../Constants/constant';
+import { API_ENDPOINTS } from "../shared/constants";
 
 
 export default class SignIn extends React.Component {
@@ -61,7 +61,7 @@ export default class SignIn extends React.Component {
   userApi = () => {
    
     axios
-      .post( loginApi, {
+      .post( API_ENDPOINTS.loginApi, {
         email: this.state.email,
         password: this.state.password,
       })
@@ -86,7 +86,7 @@ export default class SignIn extends React.Component {
       .catch((Error) => {
         this.setState({ loading:false})
         console.log(Error);
-        toast.error(Error.message, {
+        toast.error("Invalid Credentials !!", {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,

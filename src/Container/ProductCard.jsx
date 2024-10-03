@@ -10,6 +10,7 @@ function ProductCard(props) {
   const navigate = useNavigate();
   let { data, addToCartfunc, addToWishlistfunc, isLogin } = props;
   const [ disable , setDisable] = useState(false)
+  const [ wishDisable , setWishDisable] = useState(false)
  
   const handleAddToCart = () => {
     let itemExits = props.cart.some((item) => item.id === data.id);
@@ -25,9 +26,9 @@ function ProductCard(props) {
       });
     } else {
       setDisable(true)
-      toast.success("Added To Cart Successfully !!", {
-        position: "top-center",
-        autoClose: 3000,
+      toast.success(data.title.slice(0, 20)+" Added Successfully", {
+        position: "top-right",
+        autoClose: 2000,
         hideProgressBar: false,
         pauseOnHover: true,
         draggable: true,
@@ -42,8 +43,8 @@ function ProductCard(props) {
     let itemExits = props.wishList.some((item) => item.id === data.id);
     if (itemExits) {
       toast.info("Product already exist", {
-        position: "top-center",
-        autoClose: 3000,
+        position: "top-right",
+        autoClose: 2000,
         hideProgressBar: false,
         pauseOnHover: true,
         draggable: true,
@@ -51,9 +52,10 @@ function ProductCard(props) {
         theme: "colored",
       });
     } else {
-      toast.success("Added To Cart Successfully !!", {
-        position: "top-center",
-        autoClose: 3000,
+      setWishDisable(true)
+      toast.success("Added To Wishlist Successfully !!", {
+        position: "top-right",
+        autoClose: 2000,
         hideProgressBar: false,
         pauseOnHover: true,
         draggable: true,
@@ -122,7 +124,7 @@ function ProductCard(props) {
 
               <button
                 type="button"
-                className=" disabled:opacity-75 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className=" disabled:opacity-75 flex items-center gap-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={handleAddToCart}
                 disabled={disable && true}
               >
@@ -131,12 +133,13 @@ function ProductCard(props) {
               </button>
               <button
                 type="button"
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="disabled:opacity-75 flex items-center gap-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={handleAddToWishlist}
                 id="addToCartBtn"
+                disabled={wishDisable && true}
               >
                 <ion-icon name="heart-outline" ></ion-icon>
-                Add To Wishlist
+                { !wishDisable ? "Add To Wishlist": "Wishlisted" }
               </button>
               </div>
             </>

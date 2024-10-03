@@ -4,7 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Register from "../Container/Regis";
 import Loading from "../Components/common/Loading";
-import { signUpApi } from "../Constants/constant";
+import { API_ENDPOINTS } from "../shared/constants";
 
 export default class SignUp extends Component {
   constructor() {
@@ -87,7 +87,7 @@ export default class SignUp extends Component {
   createUserApi = () => {
     this.setState({loading:true})
     axios
-      .post( signUpApi, {
+      .post( API_ENDPOINTS.signUpApi, {
         name: this.state.name,
         email: this.state.email,
         password: this.state.password,
@@ -110,7 +110,7 @@ export default class SignUp extends Component {
       .catch((Error) => {
         this.setState({loading:false})
         console.log(Error);
-        toast.error(Error.message, {
+        toast.error("Enter valid Credentials !!", {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -128,7 +128,7 @@ export default class SignUp extends Component {
     }
     return (
       <>
-      {this.state.loading&&<Loading />}
+      {this.state.loading && <Loading />}
        <Register handleUser={this.handleUser} handleValidation={this.handleValidation} />
       </>
     );
