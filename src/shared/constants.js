@@ -4,4 +4,5 @@ export const API_ENDPOINTS = {
     productApi: "https://api.escuelajs.co/api/v1/products",
     searchItemApi: "https://api.escuelajs.co/api/v1/products/?title=",
     categoryApi: "https://api.escuelajs.co/api/v1/categories/",
+    // paginationApi : "https://api.escuelajs.co/api/v1/products?offset=10&limit=10"
   };

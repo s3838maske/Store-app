@@ -3,11 +3,11 @@ import {productData , handleSearchApi, handleCategoryApi} from "./productApi";
 
 
 
-function* productList() {
-    const data = yield call(productData)
+function* productList(action) {
+    const data = yield call(productData , action.payload)
     yield put ({
-        type : "CALL_PRODUCT_LIST",
-        payload : data.slice(0,20)
+        type : "CALL_PRODUCT_LIST", 
+        payload : data
     })
 }
 

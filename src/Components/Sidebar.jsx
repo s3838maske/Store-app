@@ -23,7 +23,7 @@ const Sidebar = () => {
           <li
             key="AllProduct"
             className="py-4 cursor-pointer"
-            onClick={() => dispatch(sagaProductList())}
+            onClick={() => dispatch(sagaProductList(10))}
           >
             <a className="text-gray-600 hover:text-gray-900">All</a>
           </li>

@@ -6,6 +6,7 @@ import { sagaProductList, sagaSearchProductList } from "../Store/Products/produc
 function Search() {
   const searchAction = useDispatch();
 
+
   const [searchInput, setSearchInput] = useState("");
 
   const handleSearch = (e) => {
@@ -13,9 +14,10 @@ function Search() {
     setSearchInput(value);
   };
 
+
   useEffect(() => {
       if (!searchInput) {
-        searchAction(sagaProductList())
+        // searchAction(sagaProductList(10))
         return
       }
       const getData = setTimeout(() => {

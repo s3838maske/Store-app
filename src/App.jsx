@@ -72,11 +72,9 @@ class App extends React.Component {
             <Route
               index
               element={
-                <Suspense fallback={<Loading/>}>
                 <ErrorBoundary>
                   <Home isLogin={this.state.isLogin} />
                 </ErrorBoundary>
-                </Suspense>
               }
             />
             <Route
@@ -96,31 +94,31 @@ class App extends React.Component {
               }
             />
             <Route path="ProductDetail/:id" element={<ItemDetails />} />
-            <Route
-              path="login"
-              element={
-                <Private>
-                  <ErrorBoundary>
-                    <SignIn
-                      isLogin={this.state.isLogin}
-                      checkUserFunction={this.handleAuthentication}
-                      userAuthApi={this.userAuthApi}
-                    />
-                  </ErrorBoundary>
-                </Private>
-              }
-            />
-            <Route
-              path="signup"
-              element={
-                <Private>
-                  <ErrorBoundary>
-                    <SignUp />
-                  </ErrorBoundary>
-                </Private>
-              }
-            />
           </Route>
+          <Route
+            path="login"
+            element={
+              <Private>
+                <ErrorBoundary>
+                  <SignIn
+                    isLogin={this.state.isLogin}
+                    checkUserFunction={this.handleAuthentication}
+                    userAuthApi={this.userAuthApi}
+                  />
+                </ErrorBoundary>
+              </Private>
+            }
+          />
+          <Route
+            path="signup"
+            element={
+              <Private>
+                <ErrorBoundary>
+                  <SignUp />
+                </ErrorBoundary>
+              </Private>
+            }
+          />
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </>

@@ -1,17 +1,15 @@
 import axios from "axios";
-// import { categoryApi, productApi } from "../../Constants/constant";
-// import { searchItemApi } from "../../Constants/constant";
 import { API_ENDPOINTS } from "../../shared/constants";
 
-const productData = async () => {
-    try { const res = await axios.get(API_ENDPOINTS.productApi);
+const productData = async (pagination) => {
+    try {
+       const res = await axios.get(`https://api.escuelajs.co/api/v1/products?offset=0&limit=${pagination}`);
+    // try { const res = await axios.get("https://api.escuelajs.co/api/v1/products?offset=10&limit=10");
      return res.data
     } catch (error) {
       console.log(error);
-    }
+    } 
   };
-  
-
 
 
   const handleSearchApi = async (searchInput) => {
