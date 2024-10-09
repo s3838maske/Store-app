@@ -5,6 +5,7 @@ const productData = async (pagination) => {
     try {
        const res = await axios.get(`https://api.escuelajs.co/api/v1/products?offset=0&limit=${pagination}`);
     // try { const res = await axios.get("https://api.escuelajs.co/api/v1/products?offset=10&limit=10");
+    console.log(res.data , pagination)
      return res.data
     } catch (error) {
       console.log(error);

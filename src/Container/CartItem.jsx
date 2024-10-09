@@ -1,9 +1,23 @@
 import React from "react";
 import { connect, useDispatch } from "react-redux";
-import { sagaDeleteToCart } from "../Store/Cart/cartAction";
+import { decrementQuantity, incrementQuantity, sagaDeleteToCart } from "../Store/Cart/cartAction";
+import { bindActionCreators } from "redux";
 
 
  function CartItem(props) {
+
+  const handleIncrement = (itemId) => {
+    console.log("called increment");
+    props.incrementAction(itemId)
+    
+  }
+  const handleDecrement = (itemId) => {
+    console.log("called decrement");
+    props.decrementAction(itemId)
+
+  }
+
+
   const dispatch = useDispatch()
   return (
     <>
@@ -47,16 +61,20 @@ import { sagaDeleteToCart } from "../Store/Cart/cartAction";
             </li>
             <div className="mb-2 flex">
               <div className="min-w-24 flex">
-                <button type="button" className="h-7 w-7">
+                <button type="button" className="h-7 w-7"
+                onClick={()=>handleDecrement(product.id)}
+                >
                   -
                 </button>
                 <input
                   type="text"
                   className="mx-1 h-7 w-9 rounded-md border text-center"
-                  defaultValue={1}
+                  // defaultValue={product.quantity || 1}
+                  value={product.quantity || 1}
                 />
                 <button
                   type="button"
+                onClick={()=>handleIncrement(product.id)}
                   className="flex h-7 w-7 items-center justify-center"
                 >
                   +
@@ -88,5 +106,12 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    incrementAction : incrementQuantity,
+    decrementAction : decrementQuantity
+  },dispatch)
+}
 
-export default connect(mapStateToProps)(CartItem);
+
+export default connect(mapStateToProps,mapDispatchToProps)(CartItem);

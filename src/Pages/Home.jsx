@@ -25,7 +25,7 @@ function Home(props) {
 
   return (
     <>
-      {!props.productListData && <Loading />}
+      {/* {!props.productListData && <Loading />} */}
       <div className="flex">
         <Sidebar />
 

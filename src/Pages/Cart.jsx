@@ -1,19 +1,31 @@
 import React, { useEffect, useState } from "react";
 import CartItem from "../Container/CartItem";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { clearCart } from "../Store/Cart/cartAction";
 
 function Cart(props) {
   const [totalItem, setTotalItem] = useState(0);
+  const [totalAmount , setTotalAmount] = useState(0)
+  const [ isCheckOut, setIsCheckOut ] = useState(false)
 
   useEffect(() => {
     let total = 0;
-
     for (let i = 0; i < props.cart.length; i++) {
       let price = props.cart[i].price;
-      total += price;
+      total += price * props.cart[i].quantity ;
     }
     setTotalItem(total);
   }, [props.cart]);
+
+  const handleCheckOut = () => {
+    if(props.cart.length===0){
+     return 
+    }
+    setIsCheckOut(true)
+    props.clearCart()
+  }
+
   return (
     <>
       <div className="mx-auto pt-14 max-w-7xl px-2 lg:px-0">
@@ -29,7 +41,10 @@ function Cart(props) {
               <h2 id="cart-heading" className="sr-only">
                 Items in your shopping cart
               </h2>
-              {props.cart.length === 0 ? (
+              
+               {isCheckOut? (
+                <h2 className="text-3xl text-center font-semibold text-green-900">Your Order has been placed successfully! 🎉</h2>
+              ) : props.cart.length === 0 ? (
                 <h1 className="text-4xl text-center font-semibold text-gray-600">
                   No Product Available
                 </h1>
@@ -77,6 +92,7 @@ function Cart(props) {
                   <button
                       type="button"
                       className="text-white flex items-center justify-center gap-3 w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      onClick={handleCheckOut}
                     >
                       <ion-icon name="cash-outline"></ion-icon>
                       Checkout Now
@@ -97,4 +113,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Cart);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    clearCart : clearCart
+  },dispatch)
+}
+
+export default connect(mapStateToProps,mapDispatchToProps )(Cart);
