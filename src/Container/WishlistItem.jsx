@@ -32,12 +32,13 @@ function WishlistItem(props) {
         theme: "colored",
       });
       props.addToCartAction(data);
+      props.removeToWishAction(data.id)
     }
   };
 
   return (
     <>
-      <ul className="bg-white px-2 flex flex-col divide-y divide-gray-200">
+      <ul className="bg-white rounded-lg px-2 flex flex-col divide-y divide-gray-200">
         {props.wishListData.map((Items) => (
           <li
             className="flex flex-col py-6 sm:flex-row sm:justify-between"

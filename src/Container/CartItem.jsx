@@ -69,7 +69,7 @@ import { bindActionCreators } from "redux";
                 <input
                   type="text"
                   className="mx-1 h-7 w-9 rounded-md border text-center"
-                  // defaultValue={product.quantity || 1}
+                  // defaultValue={product.quantity}
                   value={product.quantity || 1}
                 />
                 <button

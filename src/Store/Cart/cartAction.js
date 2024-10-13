@@ -4,7 +4,8 @@ const addToCart = (payload) => {
     return ( {
         type : "ADD_TO_CART",
         payload : {...payload,
-                    quantity:1}
+                    quantity:1
+                }
     })
 }
 

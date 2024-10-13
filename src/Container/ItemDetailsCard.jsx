@@ -8,6 +8,32 @@ import { sagaAddToWish } from '../Store/Wishlist/wishAction';
 export default  function ItemDetailsCard (props) {
   const { productData } = props
   const dispatch = useDispatch()
+
+  const handleProduct = (data) => {
+    let itemExits = props.cart.some((item) => item.id === data.id);
+    if (itemExits) {
+      toast.info("Product already exist", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    } else {
+      toast.success("Added To Cart Successfully !!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      dispatch(sagaAddToWish(data))
+    }
+  };
   
   return (
     <section className="bg-white overflow-hidden">
@@ -45,7 +71,7 @@ export default  function ItemDetailsCard (props) {
               <span className="title-font text-xl font-bold text-gray-900">₹{productData.price}</span>
               <button
                 type="button"
-                onClick={() => dispatch(sagaAddToWish(productData))}
+                onClick={handleProduct}
                 className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
               >
                 Add to Wishlist

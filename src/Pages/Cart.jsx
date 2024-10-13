@@ -11,9 +11,13 @@ function Cart(props) {
 
   useEffect(() => {
     let total = 0;
+    
     for (let i = 0; i < props.cart.length; i++) {
       let price = props.cart[i].price;
-      total += price * props.cart[i].quantity ;
+      let quantity = props.cart[i].quantity 
+      console.log(quantity);  
+      total += price * quantity || price;
+      setTotalAmount(total)
     }
     setTotalItem(total);
   }, [props.cart]);
@@ -53,7 +57,7 @@ function Cart(props) {
               )}
             </section>
             {/* Order summary */}
-            <section
+        {    <section
               aria-labelledby="summary-heading"
               className="mt-16 rounded-md bg-white lg:col-span-4 lg:mt-0 lg:p-0"
             >
@@ -91,15 +95,16 @@ function Cart(props) {
                   </div>
                   <button
                       type="button"
-                      className="text-white flex items-center justify-center gap-3 w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      className="text-white disabled:opacity-75 flex items-center justify-center gap-3 w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       onClick={handleCheckOut}
+                      disabled={totalAmount===0 && true}
                     >
                       <ion-icon name="cash-outline"></ion-icon>
                       Checkout Now
                     </button>
                 </dl>
               </div>
-            </section>
+            </section>}
           </form>
         </div>
       </div>
