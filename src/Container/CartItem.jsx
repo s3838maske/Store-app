@@ -7,12 +7,10 @@ import { bindActionCreators } from "redux";
  function CartItem(props) {
 
   const handleIncrement = (itemId) => {
-    console.log("called increment");
     props.incrementAction(itemId)
     
   }
   const handleDecrement = (itemId) => {
-    console.log("called decrement");
     props.decrementAction(itemId)
 
   }

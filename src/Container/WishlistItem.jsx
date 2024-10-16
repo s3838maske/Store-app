@@ -56,7 +56,7 @@ function WishlistItem(props) {
                     <h3 className="text-lg font-semibold leading-snug sm:pr-8">
                       {Items.title}
                     </h3>
-                    <p className="text-sm">{Items.description.slice(0,100)}</p>
+                    <p className="text-sm">{Items.description}</p>
                   </div>
                   <div className="text-right">
                     <p className="text-lg font-semibold">₹{Items.price} </p>

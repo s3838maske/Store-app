@@ -8,10 +8,10 @@ import { toast } from "react-toastify";
 
 function ProductCard(props) {
   const navigate = useNavigate();
-  let { data, addToCartfunc, addToWishlistfunc, isLogin } = props;
+  let { data, isLogin } = props;
   const [ disable , setDisable] = useState(false)
   const [ wishDisable , setWishDisable] = useState(false)
- 
+  
   const handleAddToCart = () => {
     let itemExits = props.cart.some((item) => item.id === data.id);
     if (itemExits) {

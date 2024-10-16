@@ -6,3 +6,5 @@ export const API_ENDPOINTS = {
     categoryApi: "https://api.escuelajs.co/api/v1/categories/",
     // paginationApi : "https://api.escuelajs.co/api/v1/products?offset=10&limit=10"
   };
+
+  

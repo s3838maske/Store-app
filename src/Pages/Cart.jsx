@@ -20,8 +20,8 @@ function Cart(props) {
       setTotalAmount(total)
     }
     setTotalItem(total);
-  }, [props.cart]);
-
+  }, [props.cart,totalAmount]);
+  
   const handleCheckOut = () => {
     if(props.cart.length===0){
      return 

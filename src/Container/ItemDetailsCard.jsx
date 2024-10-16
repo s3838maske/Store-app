@@ -1,16 +1,46 @@
 import React from 'react'
 import { Star} from 'lucide-react'
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { sagaAddToWish } from '../Store/Wishlist/wishAction';
+import { toast } from 'react-toastify';
+import { sagaAddToCart } from '../Store/Cart/cartAction';
 
 
 export default  function ItemDetailsCard (props) {
   const { productData } = props
   const dispatch = useDispatch()
+  const wish = useSelector(state=>state.wishList.wishListProduct)
+  const cart = useSelector(state=>state.cartProduct.cart)
 
   const handleProduct = (data) => {
-    let itemExits = props.cart.some((item) => item.id === data.id);
+    let itemExits = wish.some((item) => item.id === data.id);
+    if (itemExits) {
+      toast.info("Product already exist", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    } else {
+      toast.success("Added To Cart Successfully !!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      dispatch(sagaAddToWish(data))
+    }
+  };
+
+  const handleAddToCart = (data) => {
+    let itemExits = cart.some((item) => item.id === data.id);
     if (itemExits) {
       toast.info("Product already exist", {
         position: "top-center",
@@ -22,16 +52,17 @@ export default  function ItemDetailsCard (props) {
         theme: "colored",
       });
     } else {
-      toast.success("Added To Cart Successfully !!", {
-        position: "top-center",
-        autoClose: 3000,
+      toast.success(data.title.slice(0, 20)+" Added Successfully", {
+        position: "top-right",
+        autoClose: 2000,
         hideProgressBar: false,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
         theme: "colored",
       });
-      dispatch(sagaAddToWish(data))
+      // props.addtocartAction(data);
+      dispatch(sagaAddToCart(data))
     }
   };
   
@@ -71,16 +102,17 @@ export default  function ItemDetailsCard (props) {
               <span className="title-font text-xl font-bold text-gray-900">₹{productData.price}</span>
               <button
                 type="button"
-                onClick={handleProduct}
+                onClick={()=>handleProduct(productData)}
                 className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
               >
                 Add to Wishlist
               </button>
               <button
                 type="button"
+                onClick={()=>handleAddToCart(productData)}
                 className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
               >
-                Buy Now
+                Add to Cart
               </button>
             </div>
           </div>

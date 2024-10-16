@@ -4,7 +4,6 @@ import { API_ENDPOINTS } from "../../shared/constants";
 const productData = async (pagination) => {
     try {
        const res = await axios.get(`https://api.escuelajs.co/api/v1/products?offset=0&limit=${pagination}`);
-    // try { const res = await axios.get("https://api.escuelajs.co/api/v1/products?offset=10&limit=10");
      return res.data
     } catch (error) {
       console.log(error);
@@ -24,7 +23,7 @@ const productData = async (pagination) => {
   const handleCategoryApi = async(id) => {
     try {
       let res = await axios.get(`${API_ENDPOINTS.categoryApi+id}/products`)
-      console.log(res.data);
+      // console.log(res.data);
       return res.data
     } catch (error) {
       console.log(error);
