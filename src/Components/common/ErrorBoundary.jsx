@@ -1,6 +1,4 @@
 import React from "react";
-import { ArrowLeft } from 'lucide-react'
-
 
 class ErrorBoundary  extends React.Component {
   constructor(props) {

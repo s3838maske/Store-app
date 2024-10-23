@@ -33,6 +33,7 @@ export default class SignUp extends Component {
   
  
   handleValidation = () => {
+    this.setState({loading:true})
    
     const { email, password, name } = this.state;
 
@@ -85,7 +86,6 @@ export default class SignUp extends Component {
 
 
   createUserApi = () => {
-    this.setState({loading:true})
     axios
       .post( API_ENDPOINTS.signUpApi, {
         name: this.state.name,
@@ -106,6 +106,8 @@ export default class SignUp extends Component {
           theme: "colored",
         });
         this.handleNavigate();
+    this.setState({loading:false})
+
       })
       .catch((Error) => {
         this.setState({loading:false})

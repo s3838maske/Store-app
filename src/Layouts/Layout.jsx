@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom'
 
 export default function Layout(props) {
 
-  let{cart , wishList, isLogin ,checkUserFunction ,currentUser} = props;
+  let { cart , wishList, isLogin ,checkUserFunction ,currentUser} = props;
 
   return (
     <>

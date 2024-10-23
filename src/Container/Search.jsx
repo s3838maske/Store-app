@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import { searchItemApi } from "../Constants/constant";
 import { useDispatch } from "react-redux";
 import { sagaProductList, sagaSearchProductList } from "../Store/Products/productAction";
 
@@ -17,7 +16,6 @@ function Search() {
 
   useEffect(() => {
       if (!searchInput) {
-        // searchAction(sagaProductList(10))
         return
       }
       const getData = setTimeout(() => {

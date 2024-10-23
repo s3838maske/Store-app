@@ -6,29 +6,29 @@ import { clearCart } from "../Store/Cart/cartAction";
 
 function Cart(props) {
   const [totalItem, setTotalItem] = useState(0);
-  const [totalAmount , setTotalAmount] = useState(0)
-  const [ isCheckOut, setIsCheckOut ] = useState(false)
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [isCheckOut, setIsCheckOut] = useState(false);
 
   useEffect(() => {
     let total = 0;
-    
+
     for (let i = 0; i < props.cart.length; i++) {
       let price = props.cart[i].price;
-      let quantity = props.cart[i].quantity 
-      console.log(quantity);  
+      let quantity = props.cart[i].quantity;
+      console.log(quantity);
       total += price * quantity || price;
-      setTotalAmount(total)
+      setTotalAmount(total);
     }
     setTotalItem(total);
-  }, [props.cart,totalAmount]);
-  
+  }, [props.cart, totalAmount]);
+
   const handleCheckOut = () => {
-    if(props.cart.length===0){
-     return 
+    if (props.cart.length === 0) {
+      return;
     }
-    setIsCheckOut(true)
-    props.clearCart()
-  }
+    setIsCheckOut(true);
+    props.clearCart();
+  };
 
   return (
     <>
@@ -45,9 +45,11 @@ function Cart(props) {
               <h2 id="cart-heading" className="sr-only">
                 Items in your shopping cart
               </h2>
-              
-               {isCheckOut? (
-                <h2 className="text-3xl text-center font-semibold text-green-900">Your Order has been placed successfully! 🎉</h2>
+
+              {isCheckOut ? (
+                <h2 className="text-3xl text-center font-semibold text-green-900">
+                  Your Order has been placed successfully! 🎉
+                </h2>
               ) : props.cart.length === 0 ? (
                 <h1 className="text-4xl text-center font-semibold text-gray-600">
                   No Product Available
@@ -57,54 +59,57 @@ function Cart(props) {
               )}
             </section>
             {/* Order summary */}
-        {    <section
-              aria-labelledby="summary-heading"
-              className="mt-16 rounded-md bg-white lg:col-span-4 lg:mt-0 lg:p-0"
-            >
-              <h2
-                id="summary-heading"
-                className=" border-b border-gray-200 px-4 py-3 text-lg font-medium text-gray-900 sm:p-4"
+            {
+              <section
+                aria-labelledby="summary-heading"
+                className="mt-16 rounded-md bg-white lg:col-span-4 lg:mt-0 lg:p-0"
               >
-                Price Details
-              </h2>
-              <div>
-                <dl className=" space-y-1 px-2 py-4">
-                  <div className="flex items-center justify-between">
-                    <dt className="text-sm text-gray-800">
-                      Price ({props.cart.length} item)
-                    </dt>
-                    <dd className="text-sm font-medium text-gray-900">
-                      ₹ {totalItem}
-                    </dd>
-                  </div>
+                <h2
+                  id="summary-heading"
+                  className=" border-b border-gray-200 px-4 py-3 text-lg font-medium text-gray-900 sm:p-4"
+                >
+                  Price Details
+                </h2>
+                <div>
+                  <dl className=" space-y-1 px-2 py-4">
+                    <div className="flex items-center justify-between">
+                      <dt className="text-sm text-gray-800">
+                        Price ({props.cart.length} item)
+                      </dt>
+                      <dd className="text-sm font-medium text-gray-900">
+                        ₹ {totalItem}
+                      </dd>
+                    </div>
 
-                  <div className="flex items-center justify-between py-4">
-                    <dt className="flex text-sm text-gray-800">
-                      <span>Delivery Charges</span>
-                    </dt>
-                    <dd className="text-sm font-medium text-green-700">Free</dd>
-                  </div>
-                  <div className="flex items-center justify-between border-y border-dashed py-4 ">
-                    <dt className="text-base font-medium text-gray-900">
-                      Total Amount
-                    </dt>
-                    <dd className="text-base font-medium text-gray-900">
-                      ₹ {totalItem}
-                    </dd>
-                  
-                  </div>
-                  <button
+                    <div className="flex items-center justify-between py-4">
+                      <dt className="flex text-sm text-gray-800">
+                        <span>Delivery Charges</span>
+                      </dt>
+                      <dd className="text-sm font-medium text-green-700">
+                        Free
+                      </dd>
+                    </div>
+                    <div className="flex items-center justify-between border-y border-dashed py-4 ">
+                      <dt className="text-base font-medium text-gray-900">
+                        Total Amount
+                      </dt>
+                      <dd className="text-base font-medium text-gray-900">
+                        ₹ {totalItem}
+                      </dd>
+                    </div>
+                    <button
                       type="button"
                       className="text-white disabled:opacity-75 flex items-center justify-center gap-3 w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       onClick={handleCheckOut}
-                      disabled={totalAmount===0 && true}
+                      disabled={totalAmount === 0 && true}
                     >
                       <ion-icon name="cash-outline"></ion-icon>
                       Checkout Now
                     </button>
-                </dl>
-              </div>
-            </section>}
+                  </dl>
+                </div>
+              </section>
+            }
           </form>
         </div>
       </div>
@@ -119,9 +124,12 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    clearCart : clearCart
-  },dispatch)
-}
+  return bindActionCreators(
+    {
+      clearCart: clearCart,
+    },
+    dispatch
+  );
+};
 
-export default connect(mapStateToProps,mapDispatchToProps )(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import ItemDetailsCard from "../Container/ItemDetailsCard";
 import Loading from "../Components/common/Loading";
+import { API_ENDPOINTS } from "../shared/constants";
 
 export default function ItemDetails() {
   const { id } = useParams();
@@ -13,7 +14,7 @@ export default function ItemDetails() {
     setLoading(true)
     try {
       let response = await axios.get(
-        `https://api.escuelajs.co/api/v1/products/${id}`
+        API_ENDPOINTS.productApi+id
       );
 
       setItemData(response.data);

@@ -5,8 +5,7 @@ import { sagaAddToCart } from "../Store/Cart/cartAction";
 import { bindActionCreators } from "redux";
 import { toast } from "react-toastify";
 import { sagaRemoveToWish } from "../Store/Wishlist/wishAction";
-// import { sagaRemoveToWish } from "../Store/Wishlist/wishAction";
-// import { BookImage } from "lucide-react";
+
 
 function WishlistItem(props) {
   const handleProduct = (data) => {

@@ -9,7 +9,6 @@ import axios from "axios";
 import NotFound from "./Pages/NotFound.jsx";
 import Private from "./Routes/PrivateRoute.jsx";
 import ErrorBoundary from "./Components/common/ErrorBoundary.jsx";
-import Loading from "./Components/common/Loading.jsx";
 const Home = lazy(() => import("./Pages/Home.jsx"));
 const ItemDetails = lazy(() => import("./Pages/ItemDetails.jsx"));
 
