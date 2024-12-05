@@ -5,9 +5,9 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
      "./node_modules/flowbite/**/*.js"
   ],
-  plugins: [
-    require('flowbite/plugin')
-],
+//   plugins: [
+//     require('flowbite/plugin')
+// ],
   theme: {
     extend: {},
   },

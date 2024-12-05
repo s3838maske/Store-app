@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import SignIn from "./Pages/SignIn.jsx";
-import SignUp from "./Pages/SignUp";
+import SignIn from "./Pages/signIn.jsx";
+import SignUp from "./Pages/signUp.jsx";
 import Wishlist from "./Pages/WishList";
 import Cart from "./Pages/Cart";
 import Layout from "./Layouts/Layout.jsx";
